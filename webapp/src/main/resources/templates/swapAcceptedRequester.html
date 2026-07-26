@@ -1,0 +1,14 @@
+<p th:text="#{email.swapAccepted.greeting(${userRequestName})}"></p>
+
+<p th:text="#{email.swapAccepted.body(${userRequestName}, ${userOwnerName})}"></p>
+
+<p th:text="#{email.swapAccepted.contact(${userOwnerName}, ${userOwnerEmail})}"></p>
+
+<p th:text="#{email.swapAccepted.emailRegistered(${emailRequester})}"></p>
+
+<p>
+    <span th:text="#{email.swapAccepted.thanks}"></span><br/>
+    <b th:text="#{email.swapAccepted.happySwapping}"></b>
+</p>
+
+

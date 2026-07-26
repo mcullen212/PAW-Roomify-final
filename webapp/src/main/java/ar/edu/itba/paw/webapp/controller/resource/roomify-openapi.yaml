@@ -1,0 +1,1011 @@
+openapi: 3.0.3
+info:
+  title: Roomify API - REST
+  description: Official Roomify REST API documentation based on the project specifications.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/webapp/api
+    description: Local server
+
+tags:
+  - name: Authentication
+  - name: Users
+  - name: Countries
+  - name: Rooms
+  - name: Contacts
+  - name: Reviews
+  - name: Group Trips
+  - name: Images
+
+security:
+  - bearerAuth: []
+
+paths:
+  /:
+    get:
+      tags: [Authentication]
+      summary: Sign in and obtain JWT
+      description: Sends credentials using Basic Auth. If valid, the server returns JWT tokens in response headers.
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Successful login. Tokens returned in headers.
+          headers:
+            access-token:
+              description: Primary access token. Must be used as a Bearer Token.
+              schema:
+                type: string
+            refresh-token:
+              description: Refresh token used to request a new auth-token.
+              schema:
+                type: string
+        '401':
+          description: Invalid credentials.
+
+  /countries:
+    get:
+      tags: [Countries]
+      summary: List countries
+      description: Returns the valid country names accepted by country fields.
+      security: []
+      responses:
+        '200':
+          description: List of countries.
+          headers:
+            Cache-Control:
+              description: Public non-conditional cache policy for the stable country list.
+              schema:
+                type: string
+              example: public, max-age=2592000
+          content:
+            application/vnd.roomify.country.v1.list+json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example:
+                - Argentina
+                - Brazil
+                - Canada
+
+  /users/{id}:
+    get:
+      tags: [Users]
+      summary: Get user profile
+      description: If the authenticated user owns the profile, private data is returned; otherwise only the public profile is returned.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: User profile.
+          content:
+            application/vnd.roomify.user.v1+json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found.
+    patch:
+      tags: [Users]
+      summary: Partial user update
+      description: Allows updating specific profile fields. Omitted or null fields are not modified.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.user.v1+json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+            example:
+              bio: New biography
+              travelPreferences: Mountains and beach
+              locale: es
+              oldPassword: oldPassword123
+              newPassword: NewPassword123
+      responses:
+        '200':
+          description: User updated.
+          content:
+            application/vnd.roomify.user.profile.v1+json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Not authenticated.
+        '403':
+          description: Not authorized to modify this user.
+        '404':
+          description: User not found.
+
+  /users:
+    post:
+      tags: [Users]
+      summary: Create user or request password reset
+      description: Used to register a new user or request a password reset using different media types.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.user.v1+json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+            example:
+              name: Full Name
+              email: user@example.com
+              password: Password123
+          application/vnd.roomify.user.reset.v1+json:
+            schema:
+              $ref: '#/components/schemas/UserResetPasswordRequest'
+            example:
+              email: user@example.com
+      responses:
+        '201':
+          description: User created.
+        '200':
+          description: Password reset request processed.
+        '400':
+          description: Invalid request.
+
+  /rooms:
+    get:
+      tags: [Rooms]
+      summary: Search or list rooms
+      description: Lists rooms with optional filters. Pagination is returned using the Link header.
+      security: []
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: destination
+          in: query
+          schema: { type: string }
+        - name: checkIn
+          in: query
+          schema: { type: string, format: date }
+        - name: checkOut
+          in: query
+          schema: { type: string, format: date }
+        - name: roomType
+          in: query
+          schema: { type: string }
+        - name: bedType
+          in: query
+          schema: { type: string }
+        - name: privateBathroom
+          in: query
+          schema: { type: boolean }
+        - name: privateKitchen
+          in: query
+          schema: { type: boolean }
+        - name: userId
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Paginated list of rooms.
+          headers:
+            Link:
+              description: Pagination links with rel first, prev, next, and last.
+              schema:
+                type: string
+              example: '<http://localhost:8080/webapp/api/rooms?page=2>; rel="next", <http://localhost:8080/webapp/api/rooms?page=5>; rel="last"'
+          content:
+            application/vnd.roomify.room.v1.list+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoomSummary'
+    post:
+      tags: [Rooms]
+      summary: Create a new room
+      description: Creates a room using JSON data and a previously uploaded image id.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.room.v1+json:
+            schema:
+              $ref: '#/components/schemas/RoomCreate'
+      responses:
+        '201':
+          description: Room created.
+          headers:
+            Location:
+              description: URI of the created room.
+              schema:
+                type: string
+                format: uri
+        '401':
+          description: Not authenticated.
+
+  /rooms/{id}:
+    get:
+      tags: [Rooms]
+      summary: Full room details
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/RoomId'
+      responses:
+        '200':
+          description: Room details.
+          content:
+            application/vnd.roomify.room.v1+json:
+              schema:
+                $ref: '#/components/schemas/Room'
+              example:
+                id: 1
+                title: Cozy Apartment in Paris
+                country: France
+                city: Paris
+                description: Bright apartment near the river
+                roomType: APARTMENT
+                bedType: DOUBLE
+                privateBathroom: true
+                privateKitchen: true
+                amenities: [WIFI, TV]
+                dayPrice: 120.00
+                imageUrl: http://localhost:8080/webapp/api/images/1
+                self: http://localhost:8080/webapp/api/rooms/1
+                owner: http://localhost:8080/webapp/api/users/2
+                images: http://localhost:8080/webapp/api/images/1
+                reviews: http://localhost:8080/webapp/api/reviews?roomId=1
+                totalReviews: 3
+                averageRating: 4.5
+        '404':
+          description: Room not found.
+    patch:
+      tags: [Rooms]
+      summary: Update room data
+      description: Partial update. Only the owner or an administrator can perform this action.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RoomId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.room.v1+json:
+            schema:
+              $ref: '#/components/schemas/RoomUpdate'
+            example:
+              title: New title
+              description: New description
+              amenities: [WIFI, TV]
+              dayPrice: 175.50
+      responses:
+        '200':
+          description: Room updated.
+          content:
+            application/vnd.roomify.room.v1+json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '401':
+          description: Not authenticated.
+        '403':
+          description: Permission denied.
+        '404':
+          description: Room not found.
+    delete:
+      tags: [Rooms]
+      summary: Delete a room
+      description: Permanently deletes a room. Fails if it has active or pending swaps or contracts.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RoomId'
+      responses:
+        '204':
+          description: Successfully deleted.
+        '401':
+          description: Not authenticated.
+        '403':
+          description: Only the owner can delete it.
+        '404':
+          description: Room not found.
+        '409':
+          description: The room has active or pending swaps or contracts.
+
+  /rooms/{id}/availabilities:
+    get:
+      tags: [Rooms]
+      summary: Effective room availability calendar
+      description: Returns the room's published availability ranges, accepted booked ranges, and the effective selectable ranges for calendar UX, scoped to the requested date range. If startDate and endDate are omitted, the API returns a default bounded window from today to one year ahead. The backend still validates availability and booking conflicts when contacts are created or accepted.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/RoomId'
+        - name: startDate
+          in: query
+          required: false
+          description: Inclusive lower bound for the availability calendar. Must be sent together with endDate.
+          schema:
+            type: string
+            format: date
+          example: '2026-02-01'
+        - name: endDate
+          in: query
+          required: false
+          description: Inclusive upper bound for the availability calendar. Must be sent together with startDate.
+          schema:
+            type: string
+            format: date
+          example: '2026-02-28'
+      responses:
+        '200':
+          description: Availability calendar for the room.
+          headers:
+            ETag:
+              description: Conditional cache validator for the effective calendar in the requested date window.
+              schema:
+                type: string
+            Cache-Control:
+              description: Uses no-cache so clients revalidate with If-None-Match before reusing a cached calendar.
+              schema:
+                type: string
+            Vary:
+              description: Response varies by Accept.
+              schema:
+                type: string
+          content:
+            application/vnd.roomify.room.availability.v1+json:
+              schema:
+                $ref: '#/components/schemas/RoomAvailabilityCalendar'
+        '304':
+          description: The cached availability calendar is still valid for the supplied ETag.
+        '400':
+          description: startDate/endDate are incomplete, malformed, or inverted.
+        '404':
+          description: Room not found.
+
+  /contacts:
+    get:
+      tags: [Contacts]
+      summary: List my contacts
+      description: Lists contacts or swaps where the authenticated user is involved.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of contacts.
+          content:
+            application/vnd.roomify.contact.v1.list+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+    post:
+      tags: [Contacts]
+      summary: Request a swap or booking
+      description: Starts a contact request for another user's room.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.contact.v1+json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+            example:
+              roomRequestedId: 2
+              checkIn: '2026-03-03'
+              checkOut: '2026-03-06'
+              isSwap: true
+              roomOfferedId: 3
+      responses:
+        '201':
+          description: Contact created.
+          headers:
+            Location:
+              description: URI of the created contact.
+              schema:
+                type: string
+                format: uri
+
+  /contacts/{id}:
+    get:
+      tags: [Contacts]
+      summary: Get one contact
+      description: Returns a single contact where the authenticated user is involved.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContactId'
+      responses:
+        '200':
+          description: Contact found.
+          content:
+            application/vnd.roomify.contact.v1+json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Contact not found.
+    patch:
+      tags: [Contacts]
+      summary: Update contact status
+      description: Accepts or rejects a pending contact, or cancels a pending/accepted contact. Room swap acceptance requires choosing dates for the offered room.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContactId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.contact.v1+json:
+            schema:
+              $ref: '#/components/schemas/ContactUpdate'
+            example:
+              status: ACCEPTED
+              checkIn: '2026-03-03'
+              checkOut: '2026-03-06'
+      responses:
+        '200':
+          description: Contact updated.
+          content:
+            application/vnd.roomify.contact.v1+json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Invalid request body.
+        '401':
+          description: Not authenticated.
+        '403':
+          description: Authenticated user cannot update this contact.
+        '404':
+          description: Contact not found.
+        '409':
+          description: Contact cannot transition from its current state.
+        '422':
+          description: Contact update failed domain validation.
+
+  /reviews:
+    get:
+      tags: [Reviews]
+      summary: Get reviews
+      description: Returns a paginated list of reviews filtered by userId, roomId or roomOwnerId.
+      security: []
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: integer }
+        - name: roomId
+          in: query
+          schema: { type: integer }
+        - name: roomOwnerId
+          in: query
+          schema: { type: integer }
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: List of reviews.
+          content:
+            application/vnd.roomify.reviews.v1.list+json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+    post:
+      tags: [Reviews]
+      summary: Leave a review
+      description: Publishes a review for a room where the user stayed.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.review.v1+json:
+            schema:
+              $ref: '#/components/schemas/ReviewCreate'
+      responses:
+        '201':
+          description: Review created.
+          headers:
+            Location:
+              description: URI of the created review.
+              schema:
+                type: string
+                format: uri
+    delete:
+      tags: [Reviews]
+      summary: Delete review
+      description: Only the review owner can delete it.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.review.v1+json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+              required: [id]
+      responses:
+        '204':
+          description: Review deleted.
+        '403':
+          description: Permission denied.
+
+  /group-trips:
+    get:
+      tags: [Group Trips]
+      summary: List planned trips
+      description: Lists the authenticated user's main planned trips.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          schema: { type: integer }
+        - name: country
+          in: query
+          schema: { type: string }
+        - name: checkIn
+          in: query
+          schema: { type: string, format: date }
+        - name: checkOut
+          in: query
+          schema: { type: string, format: date }
+        - name: status
+          in: query
+          schema: { type: string }
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, default: 12 }
+      responses:
+        '200':
+          description: List of group trips.
+          content:
+            application/vnd.roomify.group-trip.v1.list+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupTrip'
+    post:
+      tags: [Group Trips]
+      summary: Create main trip
+      description: Starts a new root group trip.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.group-trip.v1+json:
+            schema:
+              $ref: '#/components/schemas/GroupTripCreate'
+      responses:
+        '201':
+          description: Group trip created.
+          headers:
+            Location:
+              description: URI of the created group trip.
+              schema:
+                type: string
+                format: uri
+
+  /group-trips/{id}:
+    get:
+      tags: [Group Trips]
+      summary: Group trip details
+      description: Returns the main trip details and includes links to its destinations.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/GroupTripId'
+      responses:
+        '200':
+          description: Group trip details.
+          content:
+            application/vnd.roomify.group-trip.v1+json:
+              schema:
+                $ref: '#/components/schemas/GroupTrip'
+
+  /group-trips/{id}/trips:
+    post:
+      tags: [Group Trips]
+      summary: Add destination to trip
+      description: Adds a specific destination within a group trip.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/GroupTripId'
+      requestBody:
+        required: true
+        content:
+          application/vnd.roomify.group-trip.trip.v1+json:
+            schema:
+              $ref: '#/components/schemas/TripCreate'
+      responses:
+        '201':
+          description: Destination added.
+          headers:
+            Location:
+              description: URI of the created destination.
+              schema:
+                type: string
+                format: uri
+
+  /images:
+    post:
+      tags: [Images]
+      summary: Upload image
+      description: Uploads a room image.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+              required: [image]
+      responses:
+        '201':
+          description: Image uploaded.
+          headers:
+            Location:
+              description: URI of the uploaded image.
+              schema:
+                type: string
+                format: uri
+        '401':
+          description: Not authenticated.
+
+  /images/{id}:
+    get:
+      tags: [Images]
+      summary: Get binary image
+      description: Retrieves the image binary data and returns the corresponding Content-Type.
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Binary image.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Image not found.
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    RoomId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ContactId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    GroupTripId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string, format: email }
+        bio: { type: string }
+        travelPreferences: { type: string }
+        locale: { type: string }
+        totalReviewsReceived: { type: integer }
+        averageRating: { type: number, format: double }
+        totalRooms: { type: integer }
+
+    UserCreate:
+      type: object
+      required: [name, email, password]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        password:
+          type: string
+          format: password
+          minLength: 8
+          pattern: '^(?=.*[A-Z])(?=.*\d).+$'
+
+    UserResetPasswordRequest:
+      type: object
+      required: [email]
+      properties:
+        email: { type: string, format: email }
+
+    UserUpdate:
+      type: object
+      properties:
+        bio: { type: string, maxLength: 500 }
+        travelPreferences: { type: string, maxLength: 100 }
+        locale: { type: string }
+        oldPassword: { type: string, format: password }
+        newPassword:
+          type: string
+          format: password
+          minLength: 8
+          pattern: '^(?=.*[A-Z])(?=.*\d).+$'
+
+    RoomSummary:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        country: { type: string }
+        city: { type: string }
+        dayPrice: { type: number, format: double }
+        imageUrl: { type: string, format: uri }
+        self: { type: string, format: uri }
+        roomType: { type: string }
+        totalReviews: { type: integer }
+        averageRating: { type: number, format: double }
+
+    Room:
+      allOf:
+        - $ref: '#/components/schemas/RoomSummary'
+        - type: object
+          properties:
+            description: { type: string }
+            roomType: { type: string }
+            bedType: { type: string }
+            privateBathroom: { type: boolean }
+            privateKitchen: { type: boolean }
+            amenities:
+              type: array
+              items: { type: string }
+            self: { type: string, format: uri }
+            owner: { type: string, format: uri }
+            images: { type: string, format: uri }
+            reviews: { type: string, format: uri }
+            totalReviews: { type: integer }
+            averageRating: { type: number, format: double }
+
+    RoomAvailabilityCalendar:
+      type: object
+      properties:
+        roomId: { type: integer }
+        self: { type: string, format: uri }
+        room: { type: string, format: uri }
+        availabilityRanges:
+          type: array
+          description: Ranges published by the room owner, clipped to the requested calendar window.
+          items:
+            $ref: '#/components/schemas/DateRange'
+        bookedRanges:
+          type: array
+          description: Ranges already occupied by accepted contacts where this room is requested or offered, clipped to the requested calendar window.
+          items:
+            $ref: '#/components/schemas/DateRange'
+        selectableRanges:
+          type: array
+          description: Future ranges within the requested calendar window that remain selectable after subtracting booked ranges from published availability.
+          items:
+            $ref: '#/components/schemas/DateRange'
+        firstSelectableDate:
+          type: string
+          format: date
+          nullable: true
+        hasSelectableStay:
+          type: boolean
+
+    RoomCreate:
+      type: object
+      properties:
+        userId: { type: integer }
+        title: { type: string }
+        country: { type: string }
+        city: { type: string }
+        description: { type: string }
+        roomType: { type: string }
+        bedType: { type: string }
+        privateBathroom: { type: boolean }
+        privateKitchen: { type: boolean }
+        amenities:
+          type: array
+          items: { type: string }
+        dateRange:
+          type: array
+          items:
+            type: object
+            properties:
+              startDate: { type: string, format: date }
+              endDate: { type: string, format: date }
+        dayPrice: { type: number, format: double }
+        imageId: { type: integer }
+      required: [userId, title, country, city, roomType, bedType, privateBathroom, privateKitchen, dateRange, dayPrice, imageId]
+
+    RoomUpdate:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        amenities:
+          type: array
+          items: { type: string }
+        dayPrice: { type: number, format: double }
+        roomType: { type: string }
+        bedType: { type: string }
+        privateBathroom: { type: boolean }
+        privateKitchen: { type: boolean }
+
+    Contact:
+      type: object
+      properties:
+        id: { type: integer }
+        roomRequestedId: { type: integer }
+        roomOfferedId: { type: integer, nullable: true }
+        requestedRange:
+          $ref: '#/components/schemas/DateRange'
+        offeredRange:
+          $ref: '#/components/schemas/DateRange'
+        isSwap: { type: boolean }
+        moneyOffer: { type: number, format: double }
+        status:
+          type: string
+          enum: [PENDING, ACCEPTED, REJECTED, CANCELED, EXPIRED]
+        pendingReview:
+          type: boolean
+          nullable: true
+          description: True when the authenticated user can still leave a review for this past accepted contact.
+        self: { type: string, format: uri }
+        links:
+          type: object
+          additionalProperties:
+            type: string
+            format: uri
+          description: Related resource links. Includes review when pendingReview is true.
+
+    ContactCreate:
+      type: object
+      required: [roomRequestedId, checkIn, checkOut, isSwap]
+      properties:
+        roomRequestedId: { type: integer }
+        checkIn: { type: string, format: date }
+        checkOut: { type: string, format: date }
+        isSwap: { type: boolean }
+        dayPrice: { type: number, format: double }
+        roomOfferedId: { type: integer, nullable: true }
+
+    ContactUpdate:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ACCEPTED, REJECTED, CANCELED]
+        checkIn: { type: string, format: date }
+        checkOut: { type: string, format: date }
+
+    DateRange:
+      type: object
+      properties:
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+
+    Review:
+      type: object
+      properties:
+        id: { type: integer }
+        reviewerName: { type: string }
+        reviewerUrl: { type: string }
+        roomId: { type: integer }
+        roomTitle: { type: string }
+        roomUrl: { type: string }
+        url: { type: string }
+        rating: { type: integer, minimum: 1, maximum: 5 }
+        comment: { type: string }
+        date: { type: string, format: date }
+
+    Reviews:
+      type: object
+      properties:
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+        totalReviews: { type: integer }
+        averageRating: { type: number, format: double }
+
+    ReviewCreate:
+      type: object
+      required: [contactId, reviewerId, rating, comment]
+      properties:
+        contactId: { type: integer }
+        reviewerId: { type: integer }
+        rating: { type: integer, minimum: 1, maximum: 5 }
+        comment: { type: string }
+
+    GroupTrip:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        description: { type: string }
+        tripId: { type: integer, nullable: true }
+        country: { type: string, nullable: true }
+        countryCode: { type: string, nullable: true }
+        tripStartDate: { type: string, format: date, nullable: true }
+        tripEndDate: { type: string, format: date, nullable: true }
+        trips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trip'
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel: { type: string }
+              href: { type: string }
+
+    GroupTripCreate:
+      type: object
+      required: [ownerId, title]
+      properties:
+        ownerId: { type: integer }
+        title: { type: string }
+
+    Trip:
+      type: object
+      properties:
+        id: { type: integer }
+        destination: { type: string }
+        checkIn: { type: string, format: date }
+        checkOut: { type: string, format: date }
+
+    TripCreate:
+      type: object
+      required: [destination, checkIn, checkOut]
+      properties:
+        destination: { type: string }
+        checkIn: { type: string, format: date }
+        checkOut: { type: string, format: date }

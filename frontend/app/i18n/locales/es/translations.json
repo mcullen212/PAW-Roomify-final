@@ -1,0 +1,944 @@
+{
+  "error": {
+    "bad_request": "Datos inválidos. Por favor revisa lo ingresado.",
+    "unauthorized": "Correo o contraseña incorrectos.",
+    "forbidden": "Acceso denegado. Tu cuenta podría estar bloqueada.",
+    "not_found": "El recurso solicitado no fue encontrado.",
+    "conflict": "Este registro ya existe.",
+    "too_many_requests": "Demasiadas peticiones. Por favor, espera un momento antes de intentar nuevamente.",
+    "server_error": "Error del servidor. Intenta más tarde.",
+    "network_error": "Sin respuesta del servidor. Revisa tu conexión."
+  },
+  "error404": {
+    "slogan": "Roomify tu hogar",
+    "title": "404 - Página no encontrada",
+    "description": "La página que buscas no existe o ha sido movida.",
+    "roomDescription": "La habitación que buscas no existe o ha sido movida.",
+    "userDescription": "El usuario que buscas no existe o ha sido movido.",
+    "tripDescription": "El viaje que buscas no existe o ha sido movido.",
+    "destinationDescription": "El destino de viaje que buscas no existe o ha sido movido.",
+    "buttonHome": "Ir al inicio"
+  },
+  "error400": {
+    "title": "400 - Solicitud inválida",
+    "description": "La solicitud no es válida. Revisá el enlace o intentá nuevamente desde el inicio.",
+    "buttonHome": "Ir al inicio"
+  },
+  "error403": {
+    "title": "403 - Acceso prohibido",
+    "description": "No tienes permiso para acceder a esta página.",
+    "buttonHome": "Ir al inicio"
+  },
+  "error500": {
+    "title": "¡Ups! Algo salió mal",
+    "desc": "Lo sentimos, pero nuestro servidor encontró un error interno. Por favor, inténtalo de nuevo más tarde.",
+    "buttonRetry": "Reintentar",
+    "buttonHome": "Ir al inicio"
+  },
+  "enums": {
+    "bedType": {
+      "TWIN": "Individual",
+      "QUEEN": "Queen",
+      "KING": "King"
+    },
+    "roomType": {
+      "HOME": "Casa",
+      "PRIVATE": "Privada",
+      "SHARED": "Compartida",
+      "STUDIO": "Estudio"
+    },
+    "amenity": {
+      "WIFI": "Wi-Fi",
+      "AC": "Aire acondicionado",
+      "HEATING": "Calefacción",
+      "PARKING": "Estacionamiento",
+      "POOL": "Pileta",
+      "GYM": "Gimnasio"
+    }
+  },
+  "navbar": {
+    "host": "Roomify tu hogar",
+    "swaps": "Intercambios",
+    "rooms": "Habitaciones",
+    "trips": "Viajes",
+    "logout": "Cerrar sesión",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse"
+  },
+  "searchBar": {
+    "destination": "Destino",
+    "destinationPlaceholder": "¿A dónde quieres ir?",
+    "dates": "Fechas",
+    "selectDates": "Seleccionar fechas",
+    "resetDates": "Limpiar fechas",
+    "filters": "Filtros",
+    "roomType": "Tipo de habitación",
+    "bedType": "Tipo de cama",
+    "any": "Cualquiera",
+    "privateBathroom": "Baño privado",
+    "privateKitchen": "Cocina privada",
+    "amenities": "Servicios",
+    "clearFilters": "Limpiar filtros",
+    "apply": "Aplicar",
+    "search": "Buscar",
+    "errors": {
+      "dateRangeRequired": "Por favor selecciona fecha de entrada y salida."
+    }
+  },
+  "exploreVerification": {
+    "title": "Por favor revisa tu correo para verificar tu cuenta",
+    "description": "Verifica tu cuenta para desbloquear todas las funciones de Roomify."
+  },
+  "home": {
+    "emptyResults": {
+      "title": "No se encontraron habitaciones",
+      "description": "Prueba cambiar el destino, las fechas o los filtros para ver más habitaciones disponibles."
+    }
+  },
+  "roomDetails": {
+    "loading": "Cargando...",
+    "notFound": "Habitación no encontrada",
+    "backToExplore": "Volver a explorar",
+    "newRating": "Nuevo",
+    "reviewSingular": "Reseña",
+    "reviewPlural": "Reseñas",
+    "hostedBy": "Anfitrión: {{hostName}}",
+    "aboutTitle": "Sobre este espacio",
+    "amenitiesTitle": "Servicios",
+    "reviewsTitle": "Reseñas",
+    "noReviews": "Todavía no hay reseñas.",
+    "pricePerDay": "/día",
+    "requestExchange": "Solicitar intercambio",
+    "ratingStarsLabel": "{{rating}} de 5 estrellas",
+    "request": {
+      "loginMessage": "Iniciá sesión para solicitar esta habitación.",
+      "loginCta": "Iniciar sesión",
+      "ownRoomMessage": "Esta es una de tus habitaciones, así que no podés solicitar un intercambio o reserva sobre ella.",
+      "manageRooms": "Administrar mis habitaciones",
+      "verifyMessage": "Verificá tu correo para enviar solicitudes de intercambio y reserva.",
+      "verifyCta": "Reenviar verificación",
+      "verifySending": "Enviando...",
+      "verifyProfile": "Ir al perfil",
+      "verifyResend": {
+        "success": "Correo de verificación enviado. Revisá tu bandeja de entrada.",
+        "error": "No pudimos enviar el correo de verificación. Intentá nuevamente."
+      },
+      "dates": "Fechas",
+      "selectDates": "Seleccionar fechas",
+      "resetDates": "Limpiar fechas",
+      "loadingAvailability": "Cargando fechas disponibles...",
+      "noSelectableDates": "Esta habitación no tiene fechas seleccionables ahora.",
+      "retryAvailability": "Reintentar",
+      "checkIn": "Entrada",
+      "checkOut": "Salida",
+      "roomSwap": "Intercambio",
+      "moneyOffer": "Oferta en dinero",
+      "offeredRoom": "Tu habitación",
+      "loadingRooms": "Cargando habitaciones...",
+      "selectRoom": "Seleccioná una habitación",
+      "amount": "Monto ofrecido",
+      "suggestedAmount": "Sugerido: {{amount}} por {{nights}} noches",
+      "useSuggested": "Usar",
+      "noRooms": "No tenés habitaciones disponibles para intercambio.",
+      "submit": "Enviar solicitud",
+      "submitting": "Enviando...",
+      "success": "Solicitud enviada correctamente.",
+      "successAddedToTrip": "Solicitud enviada y agregada a tu viaje.",
+      "addToTrip": {
+        "title": "¿Agregar este intercambio a tu viaje?",
+        "description": "Estas fechas coinciden con uno de tus destinos. ¿Querés agregar esta solicitud a ese viaje?",
+        "confirm": "Agregar al viaje",
+        "cancel": "Solo enviar intercambio"
+      },
+      "errors": {
+        "loadRooms": "No pudimos cargar tus habitaciones.",
+        "missingDates": "Seleccioná fecha de entrada y salida.",
+        "invalidDateRange": "La salida debe ser posterior a la entrada.",
+        "pastDate": "La fecha de entrada debe ser hoy o posterior.",
+        "availabilityLoading": "Las fechas disponibles todavía están cargando.",
+        "loadAvailability": "No pudimos cargar las fechas disponibles de esta habitación.",
+        "noAvailability": "Esta habitación no tiene fechas disponibles ahora.",
+        "unavailableDates": "Elegí fechas dentro de la disponibilidad y fuera de rangos ocupados.",
+        "missingOfferedRoom": "Seleccioná la habitación que querés ofrecer.",
+        "invalidMoney": "Ingresá un monto positivo.",
+        "submit": "No pudimos enviar la solicitud. Intentá nuevamente."
+      }
+    },
+    "fallback": {
+      "host": "Anfitrión",
+      "guest": "Huésped"
+    }
+  },
+  "profile": {
+    "loading": "Cargando perfil...",
+    "userNotFound": "Usuario no encontrado",
+    "fallbackName": "Usuario",
+    "errors": {
+      "load": "No pudimos cargar la información del perfil.",
+      "biography": "No pudimos actualizar la biografía.",
+      "travelPreferences": "No pudimos actualizar las preferencias de viaje.",
+      "locale": "No pudimos actualizar el idioma.",
+      "password": "No pudimos actualizar la contraseña. Revisá la clave actual."
+    },
+    "success": {
+      "profile": "Perfil actualizado correctamente.",
+      "password": "Contraseña cambiada exitosamente."
+    },
+    "header": {
+      "welcome": "Bienvenido/a {{name}}",
+      "rating": "Puntaje",
+      "reviews": "Reseñas recibidas",
+      "writtenReviews": "Reseñas escritas",
+      "viewReviews": "Ver {{count}} reseñas recibidas"
+    },
+    "reviewsCard": {
+      "title": "Reseñas",
+      "description": "Consultá las reseñas que recibieron tus habitaciones y las que escribiste después de estadías completadas.",
+      "action": "Abrir reseñas"
+    },
+    "stats": {
+      "title": "Estadísticas de intercambios y ganancias",
+      "totalEarned": "Total ganado",
+      "totalSpent": "Total gastado",
+      "totalSwaps": "Total de intercambios"
+    },
+    "biography": {
+      "title": "Biografía",
+      "empty": "Todavía no agregaste una biografía."
+    },
+    "languages": {
+      "title": "Idiomas",
+      "primaryUiLanguage": "Idioma principal de la interfaz",
+      "english": "Inglés",
+      "spanish": "Español",
+      "description": "Tu idioma principal determina el idioma de la interfaz del sitio y de los correos (inglés o español)."
+    },
+    "travelPreferences": {
+      "title": "Preferencias de viaje",
+      "empty": "No especificaste preferencias de viaje."
+    },
+    "account": {
+      "title": "Cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "currentPassword": "Contraseña actual",
+      "newPassword": "Nueva contraseña",
+      "hideCurrentPassword": "Ocultar contraseña actual",
+      "showCurrentPassword": "Mostrar contraseña actual",
+      "hideNewPassword": "Ocultar nueva contraseña",
+      "showNewPassword": "Mostrar nueva contraseña",
+      "editPassword": "Editar contraseña",
+      "cancelPasswordEdit": "Cancelar edición de contraseña",
+      "savePassword": "Guardar nueva contraseña",
+      "passwordRequirements": "Ingresá tu contraseña actual y elegí una nueva de al menos 8 caracteres, un número y una mayúscula.",
+      "verificationStatus": "Estado de verificación",
+      "verified": "Verificada",
+      "notVerified": "No verificada"
+    }
+  },
+  "publicProfile": {
+    "stats": {
+      "rating": "Puntaje promedio",
+      "reviews": "Reseñas recibidas",
+      "rooms": "Habitaciones publicadas"
+    },
+    "biography": {
+      "empty": "Este usuario todavía no agregó una biografía."
+    },
+    "travelPreferences": {
+      "empty": "Este usuario todavía no especificó preferencias de viaje."
+    },
+    "reviews": {
+      "title": "Reseñas recibidas",
+      "empty": "Este usuario todavía no recibió reseñas.",
+      "error": "No pudimos cargar las reseñas de este usuario."
+    }
+  },
+  "profileReviews": {
+    "error": "No pudimos cargar tus reseñas.",
+    "backToProfile": "Volver al perfil",
+    "tabs": {
+      "ariaLabel": "Reseñas del perfil",
+      "received": {
+        "label": "Recibidas",
+        "title": "Reseñas recibidas",
+        "description": "Reseñas que dejaron huéspedes sobre tus habitaciones, ordenadas de más nuevas a más antiguas.",
+        "empty": "Tus habitaciones todavía no recibieron reseñas."
+      },
+      "written": {
+        "label": "Escritas",
+        "title": "Reseñas que escribiste",
+        "description": "Todas las reseñas que escribiste, ordenadas de más nuevas a más antiguas.",
+        "empty": "Todavía no escribiste reseñas."
+      }
+    },
+    "delete": {
+      "action": "Eliminar reseña",
+      "title": "Eliminar reseña",
+      "description": "¿Seguro que querés eliminar esta reseña? Esta acción no se puede deshacer.",
+      "success": "Reseña eliminada correctamente.",
+      "error": "No pudimos eliminar esta reseña. Intentá nuevamente."
+    }
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Ingresa tus credenciales para acceder a tu cuenta",
+    "email_label": "Correo electrónico",
+    "email_placeholder": "nombre@ejemplo.com",
+    "password_label": "Contraseña",
+    "password_placeholder": "Ingresa tu contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "remember_me": "Recordarme",
+    "button_submit": "Iniciar sesión",
+    "button_loading": "Iniciando sesión...",
+    "verification_email_resent": "Reenviamos el correo de verificación. Revisá tu bandeja de entrada.",
+    "no_account": "¿No tienes una cuenta?",
+    "signup_link": "Regístrate",
+    "errors": {
+      "too_many_requests": "Demasiadas peticiones. Por favor, espera un momento antes de intentar nuevamente.",
+      "invalid_credentials": "Correo o contraseña es incorrecto.",
+      "network_error": "Error de conexión con el servidor."
+    },
+    "hero": {
+      "title": "Intercambia habitaciones con viajeros de todo el mundo",
+      "description": "Únete a miles de miembros que ya están intercambiando habitaciones y creando experiencias de viaje inolvidables.",
+      "stats": {
+        "users": "Usuarios activos",
+        "countries": "Países",
+        "exchanges": "Intercambios"
+      }
+    }
+  },
+  "forgot_password": {
+    "back_to_login": "Volver al inicio de sesión",
+    "title": "¿Olvidaste tu contraseña?",
+    "subtitle": "No te preocupes, te enviaremos instrucciones para recuperarla.",
+    "email_label": "Correo electrónico",
+    "email_placeholder": "Ingresá tu correo",
+    "button_submit": "Enviar enlace de recuperación",
+    "button_loading": "Enviando...",
+    "remember_password": "¿Recordaste tu contraseña?",
+    "sign_in": "Iniciá sesión",
+    "success": {
+      "title": "Revisá tu correo",
+      "sent_to": "Enviamos un código de verificación a",
+      "enter_code": "Ingresar código de verificación",
+      "didnt_receive": "¿No recibiste el correo?",
+      "resend": "Reenviar"
+    },
+    "hero": {
+      "title": "Recuperación segura de contraseña",
+      "description": "Nos tomamos tu seguridad en serio. Recibirás un código de verificación de 6 dígitos para restablecer tu contraseña de forma segura.",
+      "stats": {
+        "encryption": "Cifrado",
+        "protected": "Protegido",
+        "support": "Soporte"
+      }
+    },
+    "errors": {
+      "email_not_found": "No encontramos una cuenta con ese correo.",
+      "unexpected": "No pudimos enviar el correo de recuperación. Intentá nuevamente."
+    }
+  },
+  "signup": {
+    "logo_alt": "Logo de Roomify",
+    "hero": {
+      "title": "¿Por qué unirse a Roomify?",
+      "benefits": [
+        "Intercambia habitaciones con viajeros verificados",
+        "Ahorra dinero en alojamiento",
+        "Vive una experiencia local auténtica",
+        "Crea una comunidad global de amigos",
+        "Mensajería y reservas seguras"
+      ],
+      "testimonial": {
+        "text": "Roomify cambió mi forma de viajar. ¡Me he hospedado en lugares increíbles y hecho amigos en todo el mundo!",
+        "author": "Sarah M.",
+        "date": "Miembro desde 2024"
+      }
+    },
+    "form": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Comienza tu viaje con Roomify hoy mismo",
+      "name_label": "Nombre completo",
+      "name_placeholder": "Juan Pérez",
+      "email_label": "Correo electrónico",
+      "email_placeholder": "nombre@ejemplo.com",
+      "password_label": "Contraseña",
+      "password_placeholder": "Crea una contraseña segura",
+      "confirm_password_label": "Confirmar contraseña",
+      "confirm_password_placeholder": "Confirma tu contraseña",
+      "show_password": "Mostrar contraseña",
+      "hide_password": "Ocultar contraseña",
+      "show_confirm_password": "Mostrar confirmación de contraseña",
+      "hide_confirm_password": "Ocultar confirmación de contraseña",
+      "password_requirements_title": "Requisitos de la contraseña",
+      "button_submit": "Crear cuenta",
+      "button_loading": "Creando cuenta...",
+      "already_have_account": "¿Ya tienes una cuenta?",
+      "login_link": "Inicia sesión",
+      "password_requirements": {
+        "length": "Al menos 8 caracteres",
+        "number": "Contiene un número",
+        "uppercase": "Contiene una letra mayúscula",
+        "match": "Las contraseñas coinciden"
+      },
+      "errors":{
+        "unexpected":"Ocurrió un error durante el registro. Por favor, intenta nuevamente.",
+        "already_exists": "Este correo ya está registrado. Intentá iniciar sesión o usá otra dirección de correo.",
+        "not_match": "Completá todos los requisitos de contraseña."
+      }
+    }
+  },
+  "resetPassword": {
+    "title": "Crear nueva contraseña",
+    "subtitle": "Tu identidad fue verificada. Elegí una contraseña nueva y segura para tu cuenta.",
+    "newPassword": "Nueva contraseña",
+    "confirmNewPassword": "Confirmar nueva contraseña",
+    "newPasswordPlaceholder": "Ingresá una nueva contraseña",
+    "confirmNewPasswordPlaceholder": "Confirmá la nueva contraseña",
+    "updating": "Actualizando...",
+    "submit": "Restablecer contraseña",
+    "heroTitle": "Protegé tu cuenta",
+    "heroDescription": "Una vez actualizada, se cerrarán las demás sesiones para mantener tu cuenta segura.",
+    "errors": {
+      "missingEmail": "Falta el correo de la cuenta para iniciar sesión después de restablecer la contraseña.",
+      "sessionExpired": "La sesión expiró o no es válida. Solicitá un nuevo código."
+    }
+  },
+  "token": {
+    "token_invalid": "El token proporcionado es inválido o ya ha sido utilizado.",
+    "verification_failed": "La verificación del correo electrónico falló. Por favor, intenta de nuevo.",
+    "verification_success": "¡Correo verificado con éxito! Ya puedes acceder a tu cuenta.",
+    "password_reset_failed": "El reseteo de contraseña no pudo completarse. El enlace podría haber expirado.",
+    "password_reset_success": "Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión.",
+    "enter_6_digits": "Por favor, ingresa los 6 dígitos"
+  },
+  "verify": {
+    "title": "Ingresa el código de verificación",
+    "subtitle": "Enviamos un código de 6 dígitos a tu correo. Ingrésalo a continuación para verificar tu identidad.",
+    "button_submit": "Verificar código",
+    "button_loading": "Verificando...",
+    "hero_title": "¡Ya casi!",
+    "hero_description": "Ingresa el código de 6 dígitos...",
+    "validity": "Validez del código",
+    "one_time_use": "Un solo uso",
+    "digit_label": "Dígito {{number}}",
+    "secure": "Seguro"
+  },
+  "popUps": {
+    "rooms": {
+      "title": "Desbloquea la gestión de habitaciones",
+      "description": "Verifica tu correo para administrar tus publicaciones, aprobar solicitudes de intercambio y consultar tus ganancias como anfitrión."
+    },
+    "swaps": {
+      "title": "Desbloquea tus intercambios",
+      "description": "Verifica tu correo para enviar, recibir y administrar solicitudes de intercambio."
+    },
+    "trips": {
+      "title": "Desbloquea la planificación de viajes",
+      "description": "Verifica tu correo para planificar viajes y organizar tus próximas estadías."
+    },
+    "verification": {
+      "enter_code": "Ingresar código de verificación",
+      "go_to_profile": "Ir al perfil"
+    }
+  },
+  "swapActions": {
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "accepting": "Aceptando...",
+    "rejecting": "Rechazando...",
+    "cancel": "Cancelar",
+    "cancelSwap": "Cancelar intercambio",
+    "canceling": "Cancelando...",
+    "resetDates": "Reiniciar",
+    "selectDates": "Seleccionar fechas",
+    "acceptTitle": "Aceptar solicitud",
+    "rejectTitle": "Rechazar solicitud",
+    "cancelTitle": "Cancelar intercambio",
+    "acceptDescription": "Revisá la solicitud antes de confirmar.",
+    "rejectDescription": "Esto rechazará la solicitud pendiente.",
+    "cancelDescription": "Confirmá que querés cancelar esta solicitud o intercambio activo.",
+    "acceptSwapSuccess": "Solicitud de intercambio aceptada.",
+    "acceptMoneySuccess": "Oferta de dinero aceptada.",
+    "rejectSuccess": "Solicitud de intercambio rechazada.",
+    "cancelSuccess": "Intercambio cancelado correctamente.",
+    "cancelInvalid": "No pudimos procesar esa solicitud de cancelación. Intentá nuevamente.",
+    "cancelForbidden": "Solo los participantes del intercambio pueden cancelar esta solicitud.",
+    "cancelWindow": "Las cancelaciones solo están disponibles más de 7 días antes de la estadía.",
+    "cancelGeneralError": "No se pudo cancelar esta solicitud.",
+    "errors": {
+      "invalidRequest": "No pudimos procesar esa solicitud. Revisá la selección e intentá nuevamente.",
+      "sessionExpired": "Tu sesión expiró. Iniciá sesión nuevamente.",
+      "ownerOnly": "Solo el dueño de la habitación solicitada puede gestionar esta solicitud.",
+      "notFound": "Esta solicitud ya no existe.",
+      "alreadyHandled": "Esta solicitud ya fue gestionada.",
+      "datesUnavailable": "Esas fechas ya no están disponibles. Elegí otro rango.",
+      "invalidSwapDates": "Las fechas seleccionadas no son válidas para este intercambio.",
+      "invalidAction": "Esta solicitud no puede actualizarse con la acción seleccionada.",
+      "cancelNow": "No pudimos cancelar esta solicitud en este momento.",
+      "updateNow": "No pudimos actualizar esta solicitud en este momento."
+    },
+    "offeredRoomDates": "Fechas para la habitación ofrecida",
+    "nightMaximum_one": "{{count}} noche como máximo",
+    "nightMaximum_other": "{{count}} noches como máximo",
+    "validation": {
+      "selectOfferedRoomDates": "Seleccioná fecha de entrada y salida para la habitación ofrecida.",
+      "invalidDateRange": "La salida debe ser posterior a la entrada.",
+      "loadOfferedRoomAvailability": "No pudimos cargar la disponibilidad de la habitación ofrecida.",
+      "noSelectableDates": "La habitación ofrecida no tiene fechas seleccionables.",
+      "unavailableDates": "Elegí fechas dentro de la disponibilidad y fuera de rangos ocupados.",
+      "nightLimit_one": "Elegí 1 noche o menos para la habitación ofrecida.",
+      "nightLimit_other": "Elegí {{count}} noches o menos para la habitación ofrecida."
+    },
+    "stayTooLong_one": "Seleccionaste {{selected}} noches, pero esta solicitud permite solo 1 noche. Elegí un rango más corto para habilitar Aceptar.",
+    "stayTooLong_other": "Seleccionaste {{selected}} noches, pero esta solicitud permite hasta {{count}} noches. Elegí un rango más corto para habilitar Aceptar."
+  },
+  "reviewActions": {
+    "leaveReview": "Dejar reseña",
+    "title": "Dejar una reseña",
+    "description": "Contá cómo fue la estadía completada.",
+    "room": "Habitación",
+    "reviewing": "Reseñando",
+    "rating": "Calificación",
+    "ratingAria": "Calificación de la reseña",
+    "starLabel_one": "{{count}} estrella",
+    "starLabel_other": "{{count}} estrellas",
+    "comment": "Comentario",
+    "commentPlaceholder": "Contá qué destacarías de la experiencia.",
+    "characters": "{{count}}/500 caracteres",
+    "submit": "Enviar reseña",
+    "submitting": "Enviando...",
+    "success": "Reseña enviada correctamente.",
+    "error": "No pudimos enviar tu reseña. Intentá nuevamente.",
+    "validation": {
+      "rating": "Seleccioná una calificación entre 1 y 5.",
+      "comment": "Escribí un comentario antes de enviar.",
+      "commentLength": "El comentario debe tener 500 caracteres como máximo.",
+      "commentPattern": "El comentario solo puede contener letras, números, espacios y puntuación."
+    }
+  },
+  "countries": {
+    "errors": {
+      "load": "No pudimos cargar la lista de países."
+    }
+  },
+  "postRoom": {
+    "title": "Publicá tu habitación",
+    "subtitle": "Compartí tu espacio con viajeros de todo el mundo",
+    "progress": "{{completed}}/{{total}} completo",
+    "loadingCountries": "Cargando países...",
+    "characterCount": "{{count}}/{{max}} caracteres",
+    "photoAlt": "Foto de la habitación {{number}}",
+    "photoMain": "Principal",
+    "fields": {
+      "title": "Título",
+      "country": "País",
+      "city": "Ciudad",
+      "description": "Descripción",
+      "pricePerDayUsd": "Precio por día (USD)"
+    },
+    "placeholders": {
+      "title": "Ej.: Estudio acogedor en el centro",
+      "country": "Seleccioná un país",
+      "city": "Ej.: Buenos Aires",
+      "description": "Describí tu espacio, el barrio y qué lo hace especial...",
+      "dateRange": "Seleccioná un rango de fechas"
+    },
+    "sections": {
+      "basic": {
+        "title": "Información básica",
+        "description": "Contanos sobre tu espacio"
+      },
+      "availability": {
+        "title": "Disponibilidad",
+        "description": "¿Cuándo está disponible tu habitación?"
+      },
+      "roomType": {
+        "title": "Tipo de habitación",
+        "description": "¿Qué tipo de espacio ofrecés?"
+      },
+      "bedType": {
+        "title": "Tipo de cama",
+        "description": "¿Qué tamaño de cama tiene la habitación?"
+      },
+      "amenities": {
+        "title": "Servicios",
+        "description": "¿Qué ofrece tu espacio?",
+        "private": "Servicios privados",
+        "general": "Servicios generales"
+      },
+      "photos": {
+        "title": "Fotos de la habitación",
+        "description": "Agregá una foto (JPG, PNG, WebP, máximo 5 MB)"
+      }
+    },
+    "actions": {
+      "addMoreDates": "Agregar más fechas",
+      "upload": "Hacé clic para subir o arrastrá y soltá",
+      "setMain": "Marcar como principal",
+      "publish": "Publicar habitación",
+      "publishing": "Publicando..."
+    },
+    "success": {
+      "created": "Habitación creada correctamente."
+    },
+    "errors": {
+      "signInRequired": "Necesitás iniciar sesión para publicar una habitación.",
+      "imageRequired": "Subí al menos una imagen de la habitación.",
+      "imageLimit": "Subí solo una imagen de la habitación.",
+      "imageTooLarge": "Cada imagen de la habitación debe pesar 5 MB o menos.",
+      "imageInvalidType": "Las imágenes de la habitación deben ser JPG, PNG o WebP.",
+      "titleRequired": "Ingresá un título para la habitación.",
+      "titleTooLong": "El título no puede superar los 50 caracteres.",
+      "titlePattern": "El título solo puede contener letras, números, espacios y puntuación.",
+      "cityRequired": "Ingresá una ciudad.",
+      "cityTooLong": "La ciudad no puede superar los 50 caracteres.",
+      "cityPattern": "El nombre de la ciudad contiene caracteres inválidos.",
+      "descriptionTooLong": "La descripción no puede superar los 500 caracteres.",
+      "descriptionPattern": "La descripción solo puede contener letras, números, espacios y puntuación.",
+      "bedTypeRequired": "Seleccioná un tipo de cama.",
+      "validCountry": "Seleccioná un país válido.",
+      "validPrice": "Ingresá un precio por día válido.",
+      "availabilityRequired": "Seleccioná al menos un rango de disponibilidad válido.",
+      "overlappingDates": "Los rangos de disponibilidad no pueden superponerse.",
+      "imageConfirm": "No pudimos confirmar la imagen subida. Intentá nuevamente.",
+      "publish": "No pudimos publicar tu habitación. Intentá nuevamente."
+    }
+  },
+  "myRooms": {
+    "title": "Tus habitaciones",
+    "subtitle": "Administrá tus habitaciones disponibles y editá sus detalles",
+    "empty": "Todavía no tenés habitaciones.",
+    "errors": {
+      "load": "No pudimos cargar tus habitaciones ahora."
+    },
+    "delete": {
+      "title": "Eliminar publicación",
+      "description": "¿Seguro que querés eliminar esta habitación? Esto borrará la publicación de la plataforma de forma permanente.",
+      "actionLabel": "Eliminar {{room}}",
+      "errors": {
+        "failed": "No podés eliminar esta habitación porque tiene un intercambio activo."
+      }
+    }
+  },
+  "editRoom": {
+    "loading": "Cargando habitación...",
+    "success": {
+      "updated": "Habitación actualizada correctamente."
+    },
+    "errors": {
+      "load": "No pudimos cargar esta habitación.",
+      "update": "No pudimos actualizar esta habitación. Intentá nuevamente."
+    },
+    "notFound": {
+      "title": "Habitación no encontrada",
+      "description": "No pudimos encontrar la habitación que querés editar."
+    },
+    "form": {
+      "title": "Editar habitación",
+      "pricePerDay": "Precio por día",
+      "amenitiesDescription": "Elegí los servicios que los huéspedes pueden esperar."
+    },
+    "actions": {
+      "backToRooms": "Volver a habitaciones",
+      "saveChanges": "Guardar cambios"
+    }
+  },
+  "trips": {
+    "title": "Tus viajes",
+    "loading": "Cargando viajes...",
+    "summary": {
+      "planning_one": "Administrando {{count}} viaje en planificación",
+      "planning_other": "Administrando {{count}} viajes en planificación",
+      "upcoming_one": "Administrando {{count}} viaje próximo",
+      "upcoming_other": "Administrando {{count}} viajes próximos",
+      "completed_one": "Administrando {{count}} viaje completado",
+      "completed_other": "Administrando {{count}} viajes completados"
+    },
+    "tabs": {
+      "ariaLabel": "Vistas de viajes",
+      "planning": {
+        "label": "Planificación",
+        "emptyMessage": "Todavía no tenés viajes en planificación.",
+        "emptyAction": "Planificar viaje"
+      },
+      "upcoming": {
+        "label": "Próximos",
+        "emptyMessage": "Todavía no tenés viajes próximos.",
+        "emptyAction": "Planificar viaje"
+      },
+      "completed": {
+        "label": "Completados",
+        "emptyMessage": "Todavía no tenés viajes completados.",
+        "emptyAction": "Planificar un viaje"
+      }
+    },
+    "status": {
+      "planning": "PLANIFICACIÓN",
+      "confirmed": "CONFIRMADO",
+      "pending": "PENDIENTE DE APROBACIÓN",
+      "completed": "COMPLETADO",
+      "upcoming": "PRÓXIMO",
+      "done": "FINALIZADO",
+      "cancelled": "CANCELADO"
+    },
+    "groupStatus": {
+      "PLANNING": "PLANIFICACIÓN",
+      "UPCOMING": "PRÓXIMO",
+      "DONE": "FINALIZADO",
+      "CANCELLED": "CANCELADO"
+    },
+    "actions": {
+      "planTrip": "Planificar viaje",
+      "backToTrips": "Volver a viajes",
+      "viewItinerary": "Ver itinerario"
+    },
+    "card": {
+      "noDestinations": "Sin destinos todavía",
+      "days_one": "{{count}} día",
+      "days_other": "{{count}} días",
+      "daysUntil_one": "En {{count}} día",
+      "daysUntil_other": "En {{count}} días"
+    },
+    "upcomingSchedule": {
+      "title": "Próximos viajes",
+      "empty": "Todavía no hay viajes próximos."
+    },
+    "errors": {
+      "load": "No pudimos cargar tus viajes ahora.",
+      "signInView": "Necesitás iniciar sesión para ver tus viajes.",
+      "signInCreate": "Necesitás iniciar sesión para crear un viaje."
+    }
+  },
+  "planTripForm": {
+    "title": "Planificar un nuevo viaje",
+    "fields": {
+      "name": "Nombre del viaje"
+    },
+    "placeholders": {
+      "name": "Ej.: Verano en Europa"
+    },
+    "actions": {
+      "create": "Crear viaje",
+      "creating": "Creando..."
+    },
+    "errors": {
+      "nameRequired": "El nombre del viaje es obligatorio."
+    }
+  },
+  "planTripPage": {
+    "description": "La planificación de viajes está disponible desde el panel de viajes."
+  },
+  "tripDetails": {
+    "loading": "Cargando viaje...",
+    "destinationDuration_one": "{{count}} día",
+    "destinationDuration_other": "{{count}} días",
+    "destinationCount_one": "{{count}} destino",
+    "destinationCount_other": "{{count}} destinos",
+    "pastPlanningWarning": "El rango de fechas de este viaje ya quedó en el pasado, así que no se puede seguir planificando.",
+    "notFound": {
+      "title": "Viaje no encontrado"
+    },
+    "stats": {
+      "totalDays": "Días totales",
+      "destinations": "Destinos",
+      "status": "Estado"
+    },
+    "dialog": {
+      "addDestinationTitle": "Agregar destino",
+      "dates": "Fechas"
+    },
+    "destinations": {
+      "title": "Destinos",
+      "findRoomsAround": "Buscar habitaciones en {{country}}",
+      "emptyHelper": "Agregá destinos para empezar a planificar estadías",
+      "empty": "Todavía no hay destinos."
+    },
+    "actions": {
+      "viewRooms": "Ver habitaciones en {{country}}",
+      "viewDestinationContacts": "Ver contactos del destino",
+      "completePlanning": "Completar planificación",
+      "completingPlanning": "Completando...",
+      "addDestination": "Agregar destino",
+      "addingDestination": "Agregando..."
+    },
+    "errors": {
+      "load": "No pudimos cargar este viaje ahora.",
+      "validCountry": "Seleccioná un país válido.",
+      "dateRangeRequired": "Seleccioná fecha de inicio y fin.",
+      "startDateToday": "La fecha de inicio debe ser hoy o posterior.",
+      "endDateAfterStart": "La fecha de fin debe ser posterior a la de inicio.",
+      "dateOverlap": "Elegí fechas que no se superpongan con otro destino de este viaje."
+    }
+  },
+  "tripDestinationContacts": {
+    "loading": "Cargando contactos...",
+    "title": "Contactos en {{country}}",
+    "backToTrip": "Volver a {{title}}",
+    "notFound": "Destino no encontrado",
+    "empty": "Todavía no hay contactos vinculados a este destino.",
+    "owner": "Dueño/a: {{name}}",
+    "ownerUnavailable": "Dueño/a no disponible",
+    "offerUserUnavailable": "Usuario de la oferta no disponible",
+    "errors": {
+      "load": "No pudimos cargar este destino ahora."
+    }
+  },
+  "swaps": {
+    "hero": {
+      "title": "Intercambios",
+      "description": "Administrá tus solicitudes de intercambio enviadas y recibidas, y revisá tu historial de transacciones."
+    },
+    "panel": {
+      "eyebrow": "Solicitudes de intercambio",
+      "requestCount_one": "{{count}} solicitud",
+      "requestCount_other": "{{count}} solicitudes"
+    },
+    "tabs": {
+      "ariaLabel": "Secciones de solicitudes de intercambio",
+      "sent": {
+        "label": "Enviadas",
+        "title": "Intercambios solicitados",
+        "emptyMessage": "Todavía no solicitaste intercambios."
+      },
+      "received": {
+        "label": "Recibidas",
+        "title": "Intercambios recibidos",
+        "emptyMessage": "Todavía no recibiste solicitudes de intercambio."
+      },
+      "active": {
+        "label": "Activas",
+        "title": "Intercambios activos",
+        "emptyMessage": "No tenés intercambios activos."
+      },
+      "canceled": {
+        "label": "Canceladas",
+        "title": "Intercambios cancelados",
+        "emptyMessage": "No tenés intercambios cancelados."
+      },
+      "past": {
+        "label": "Pasadas",
+        "title": "Intercambios pasados",
+        "emptyMessage": "No tenés intercambios pasados."
+      },
+      "expired": {
+        "label": "Expiradas",
+        "title": "Intercambios expirados",
+        "emptyMessage": "No tenés intercambios expirados."
+      }
+    },
+    "empty": {
+      "helper": "Las nuevas solicitudes aparecerán acá apenas existan."
+    },
+    "error": {
+      "load": "No pudimos cargar tus intercambios ahora."
+    },
+    "status": {
+      "ACCEPTED": "Aceptado",
+      "PENDING": "Pendiente",
+      "REJECTED": "Rechazado",
+      "CANCELED": "Cancelado",
+      "EXPIRED": "Expirado"
+    },
+    "dates": {
+      "pending": "Fechas pendientes",
+      "createdUnavailable": "Fecha de creación no disponible"
+    },
+    "contactType": {
+      "swap": "Intercambio de habitación",
+      "money": "Oferta de dinero"
+    },
+    "cards": {
+      "yourRoom": "Tu habitación",
+      "roomYouRequested": "Habitación que solicitaste",
+      "theirOfferedRoom": "Su habitación ofrecida",
+      "yourOfferedRoom": "Tu habitación ofrecida",
+      "theirMoneyOffer": "Su oferta de dinero",
+      "yourMoneyOffer": "Tu oferta de dinero",
+      "withUser": "Con {{name}}",
+      "participantUnavailable": "Participante no disponible",
+      "roomFallback": "Habitación #{{id}}",
+      "noRoomSelected": "Sin habitación seleccionada",
+      "madeBy": "Hecha por {{name}}"
+    },
+    "dialog": {
+      "requestedRoom": "Habitación solicitada",
+      "offeredRoom": "Habitación ofrecida",
+      "moneyOffer": "Oferta de dinero",
+      "roomUnavailable": "Habitación no disponible",
+      "offeredBy": "Ofrecida por {{name}}"
+    }
+  },
+  "button": {
+    "back": "Volver",
+    "submit": "Enviar",
+    "retry": "Reintentar",
+    "loading": "Cargando...",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "deleting": "Eliminando..."
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageOf": "Página {{currentPage}} de {{totalPages}}"
+  },
+  "pageTitles": {
+    "home": "Explorar habitaciones",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "forgotPassword": "Recuperar contraseña",
+    "verifyAccount": "Verificar cuenta",
+    "resetPassword": "Restablecer contraseña",
+    "profile": "Perfil",
+    "profileReviews": "Reseñas del perfil",
+    "publicProfile": "Perfil público",
+    "roomDetails": "Detalle de habitación",
+    "postRoom": "Publicar habitación",
+    "editRoom": "Editar habitación",
+    "myRooms": "Mis habitaciones",
+    "swaps": "Intercambios",
+    "trips": "Viajes",
+    "tripDetails": "Detalle del viaje",
+    "planTrip": "Planificar viaje",
+    "forbidden": "403 Acceso prohibido",
+    "serverError": "500 Error del servidor",
+    "notFound": "404 Página no encontrada"
+  },
+  "pageDescriptions": {
+    "home": "Encontrá e intercambiá habitaciones con viajeros de todo el mundo",
+    "login": "Iniciá sesión en tu cuenta de Roomify",
+    "forgotPassword": "Restablecé la contraseña de tu cuenta de Roomify",
+    "verifyAccount": "Verificá el código de tu cuenta de Roomify",
+    "resetPassword": "Elegí una nueva contraseña para tu cuenta de Roomify",
+    "profile": "Gestioná tu perfil de Roomify",
+    "profileReviews": "Consultá y administrá tus reseñas en Roomify",
+    "signup": "Creá tu cuenta de Roomify",
+    "roomDetails": "Consultá detalles, disponibilidad y reseñas de la habitación",
+    "postRoom": "Publicá tu habitación para intercambiar en Roomify",
+    "editRoom": "Editá tu publicación de habitación en Roomify",
+    "myRooms": "Administrá tus publicaciones de habitaciones en Roomify",
+    "swaps": "Seguimiento de tus solicitudes de intercambio en Roomify",
+    "trips": "Planificá y administrá tus viajes en Roomify",
+    "tripDetails": "Consultá los detalles de tu viaje en Roomify",
+    "tripDestinationContacts": "Consultá contactos para un destino de viaje en Roomify",
+    "planTrip": "Planificá un nuevo viaje en Roomify",
+    "publicProfile": "Conocé el perfil público de un usuario de Roomify"
+  },
+  "months": {
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
+  }
+}

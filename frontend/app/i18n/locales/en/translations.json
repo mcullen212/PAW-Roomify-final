@@ -1,0 +1,944 @@
+{
+  "error": {
+    "bad_request": "Invalid data. Please check your input.",
+    "unauthorized": "Incorrect email or password.",
+    "forbidden": "Access denied. Your account might be locked.",
+    "not_found": "The requested resource was not found.",
+    "conflict": "This record already exists.",
+    "too_many_requests": "Too many requests. Please wait a moment before trying again.",
+    "server_error": "Server error. Please try again later.",
+    "network_error": "No response from server. Check your connection."
+  },
+  "error404": {
+    "slogan": "Roomify your home",
+    "title": "404 - Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "roomDescription": "The room you are looking for does not exist or has been moved.",
+    "userDescription": "The user you are looking for does not exist or has been moved.",
+    "tripDescription": "The trip you are looking for does not exist or has been moved.",
+    "destinationDescription": "The trip destination you are looking for does not exist or has been moved.",
+    "buttonHome": "Go to home"
+  },
+  "error400": {
+    "title": "400 - Bad request",
+    "description": "The request is invalid. Please check the link or try again from the home page.",
+    "buttonHome": "Go to home"
+  },
+  "error403": {
+    "title": "403 - Access forbidden",
+    "description": "You do not have permission to access this page.",
+    "buttonHome": "Go to home"
+  },
+  "error500": {
+    "title": "Oops! Something went wrong",
+    "desc": "We're sorry, but our server encountered an internal error. Please try again later.",
+    "buttonRetry": "Retry",
+    "buttonHome": "Go to Homepage"
+  },
+  "enums": {
+    "bedType": {
+      "TWIN": "Twin",
+      "QUEEN": "Queen",
+      "KING": "King"
+    },
+    "roomType": {
+      "HOME": "Home",
+      "PRIVATE": "Private",
+      "SHARED": "Shared",
+      "STUDIO": "Studio"
+    },
+    "amenity": {
+      "WIFI": "Wi-Fi",
+      "AC": "Air conditioning",
+      "HEATING": "Heating",
+      "PARKING": "Parking",
+      "POOL": "Pool",
+      "GYM": "Gym"
+    }
+  },
+  "navbar": {
+    "host": "Roomify your home",
+    "swaps": "Swaps",
+    "rooms": "Rooms",
+    "trips": "Trips",
+    "logout": "Log out",
+    "login": "Log in",
+    "signup": "Sign up"
+  },
+  "searchBar": {
+    "destination": "Destination",
+    "destinationPlaceholder": "Where do you want to go?",
+    "dates": "Dates",
+    "selectDates": "Select dates",
+    "resetDates": "Reset Dates",
+    "filters": "Filters",
+    "roomType": "Room type",
+    "bedType": "Bed type",
+    "any": "Any",
+    "privateBathroom": "Private Bathroom",
+    "privateKitchen": "Private Kitchen",
+    "amenities": "Amenities",
+    "clearFilters": "Clear filters",
+    "apply": "Apply",
+    "search": "Search",
+    "errors": {
+      "dateRangeRequired": "Please select both check-in and check-out dates."
+    }
+  },
+  "exploreVerification": {
+    "title": "Please check your email for verification",
+    "description": "Verify your account to unlock all Roomify features."
+  },
+  "home": {
+    "emptyResults": {
+      "title": "No rooms found",
+      "description": "Try changing your destination, dates, or filters to see more available rooms."
+    }
+  },
+  "roomDetails": {
+    "loading": "Loading...",
+    "notFound": "Room not found",
+    "backToExplore": "Back to explore",
+    "newRating": "New",
+    "reviewSingular": "Review",
+    "reviewPlural": "Reviews",
+    "hostedBy": "Hosted by {{hostName}}",
+    "aboutTitle": "About this space",
+    "amenitiesTitle": "Amenities",
+    "reviewsTitle": "Reviews",
+    "noReviews": "No reviews yet.",
+    "pricePerDay": "/day",
+    "requestExchange": "Request to exchange",
+    "ratingStarsLabel": "{{rating}} out of 5 stars",
+    "request": {
+      "loginMessage": "Log in to request this room.",
+      "loginCta": "Log in to request",
+      "ownRoomMessage": "This is one of your rooms, so you can't request a swap or reservation for it.",
+      "manageRooms": "Manage my rooms",
+      "verifyMessage": "Verify your email to send swap and reservation requests.",
+      "verifyCta": "Resend verification",
+      "verifySending": "Sending...",
+      "verifyProfile": "Go to profile",
+      "verifyResend": {
+        "success": "Verification email sent. Check your inbox.",
+        "error": "We couldn't send the verification email. Please try again."
+      },
+      "dates": "Dates",
+      "selectDates": "Select dates",
+      "resetDates": "Reset dates",
+      "loadingAvailability": "Loading available dates...",
+      "noSelectableDates": "This room has no selectable dates right now.",
+      "retryAvailability": "Retry",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "roomSwap": "Room swap",
+      "moneyOffer": "Money offer",
+      "offeredRoom": "Your room",
+      "loadingRooms": "Loading rooms...",
+      "selectRoom": "Select a room",
+      "amount": "Offer amount",
+      "suggestedAmount": "Suggested: {{amount}} for {{nights}} nights",
+      "useSuggested": "Use",
+      "noRooms": "You don't have rooms available for a swap.",
+      "submit": "Send request",
+      "submitting": "Sending...",
+      "success": "Swap request sent successfully.",
+      "successAddedToTrip": "Request sent and added to your trip.",
+      "addToTrip": {
+        "title": "Add this swap to your trip?",
+        "description": "These dates fit one of your trip destinations. Do you want to add this swap request to that trip?",
+        "confirm": "Add to trip",
+        "cancel": "Only send swap"
+      },
+      "errors": {
+        "loadRooms": "We couldn't load your rooms.",
+        "missingDates": "Select check-in and check-out dates.",
+        "invalidDateRange": "Check-out must be after check-in.",
+        "pastDate": "Check-in must be today or later.",
+        "availabilityLoading": "Available dates are still loading.",
+        "loadAvailability": "We couldn't load this room's available dates.",
+        "noAvailability": "This room has no available dates right now.",
+        "unavailableDates": "Choose dates inside availability and outside booked ranges.",
+        "missingOfferedRoom": "Select the room you want to offer.",
+        "invalidMoney": "Enter a positive offer amount.",
+        "submit": "We couldn't send the request. Please try again."
+      }
+    },
+    "fallback": {
+      "host": "Host",
+      "guest": "Guest"
+    }
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "userNotFound": "User not found",
+    "fallbackName": "User",
+    "errors": {
+      "load": "We could not load your profile information.",
+      "biography": "We could not update your biography.",
+      "travelPreferences": "We could not update your travel preferences.",
+      "locale": "We could not update your language.",
+      "password": "We could not update your password. Check your current password."
+    },
+    "success": {
+      "profile": "Profile updated successfully.",
+      "password": "Password changed successfully."
+    },
+    "header": {
+      "welcome": "Welcome {{name}}",
+      "rating": "Rating",
+      "reviews": "Reviews received",
+      "writtenReviews": "Reviews written",
+      "viewReviews": "View {{count}} received reviews"
+    },
+    "reviewsCard": {
+      "title": "Reviews",
+      "description": "View reviews your rooms received and the reviews you wrote after completed stays.",
+      "action": "Open reviews"
+    },
+    "stats": {
+      "title": "Swap & earnings stats",
+      "totalEarned": "Total earned",
+      "totalSpent": "Total spent",
+      "totalSwaps": "Total swaps"
+    },
+    "biography": {
+      "title": "Biography",
+      "empty": "No biography provided yet."
+    },
+    "languages": {
+      "title": "Languages",
+      "primaryUiLanguage": "Primary UI language",
+      "english": "English",
+      "spanish": "Spanish",
+      "description": "Your primary language determines the site interface and email language (English or Spanish)."
+    },
+    "travelPreferences": {
+      "title": "Travel preferences",
+      "empty": "No travel preferences specified."
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "password": "Password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "hideCurrentPassword": "Hide current password",
+      "showCurrentPassword": "Show current password",
+      "hideNewPassword": "Hide new password",
+      "showNewPassword": "Show new password",
+      "editPassword": "Edit password",
+      "cancelPasswordEdit": "Cancel password edit",
+      "savePassword": "Save new password",
+      "passwordRequirements": "Enter your current password and choose a new password with at least 8 characters, one number, and one uppercase letter.",
+      "verificationStatus": "Verification status",
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    }
+  },
+  "publicProfile": {
+    "stats": {
+      "rating": "Average rating",
+      "reviews": "Reviews received",
+      "rooms": "Rooms hosted"
+    },
+    "biography": {
+      "empty": "This user has not added a biography yet."
+    },
+    "travelPreferences": {
+      "empty": "This user has not specified travel preferences yet."
+    },
+    "reviews": {
+      "title": "Reviews received",
+      "empty": "This user has not received reviews yet.",
+      "error": "We couldn't load this user's reviews."
+    }
+  },
+  "profileReviews": {
+    "error": "We couldn't load your reviews.",
+    "backToProfile": "Back to profile",
+    "tabs": {
+      "ariaLabel": "Profile reviews",
+      "received": {
+        "label": "Received",
+        "title": "Reviews received",
+        "description": "Reviews left by guests for rooms you host, ordered from newest to oldest.",
+        "empty": "Your rooms have not received reviews yet."
+      },
+      "written": {
+        "label": "Written",
+        "title": "Reviews you wrote",
+        "description": "All reviews you have written, ordered from newest to oldest.",
+        "empty": "You have not written reviews yet."
+      }
+    },
+    "delete": {
+      "action": "Delete review",
+      "title": "Delete review",
+      "description": "Are you sure you want to delete this review? This action cannot be undone.",
+      "success": "Review deleted successfully.",
+      "error": "We couldn't delete this review. Please try again."
+    }
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Enter your credentials to access your account",
+    "email_label": "Email address",
+    "email_placeholder": "name@example.com",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "forgot_password": "Forgot password?",
+    "remember_me": "Remember me",
+    "button_submit": "Sign in",
+    "button_loading": "Signing in...",
+    "verification_email_resent": "We have resent the verification email. Please check your inbox.",
+    "no_account": "Don't have an account?",
+    "signup_link": "Sign up",
+    "errors": {
+      "too_many_requests": "Too many requests. Please wait a moment before trying again.",
+      "invalid_credentials": "Email or password incorrect.",
+      "network_error": "Server connection failed."
+    },
+    "hero": {
+      "title": "Exchange rooms with travelers worldwide",
+      "description": "Join thousands of members who are already exchanging rooms and creating unforgettable travel experiences.",
+      "stats": {
+        "users": "Active users",
+        "countries": "Countries",
+        "exchanges": "Exchanges"
+      }
+    }
+  },
+  "forgot_password": {
+    "back_to_login": "Back to login",
+    "title": "Forgot password?",
+    "subtitle": "No worries, we'll send you reset instructions.",
+    "email_label": "Email address",
+    "email_placeholder": "Enter your email",
+    "button_submit": "Send reset link",
+    "button_loading": "Sending...",
+    "remember_password": "Remember your password?",
+    "sign_in": "Sign in",
+    "success": {
+      "title": "Check your email",
+      "sent_to": "We sent a verification code to",
+      "enter_code": "Enter verification code",
+      "didnt_receive": "Didn't receive the email?",
+      "resend": "Click to resend"
+    },
+    "hero": {
+      "title": "Secure password reset",
+      "description": "We take your security seriously. You'll receive a 6-digit verification code to reset your password safely.",
+      "stats": {
+        "encryption": "Encryption",
+        "protected": "Protected",
+        "support": "Support"
+      }
+    },
+    "errors": {
+      "email_not_found": "No account found with that email address.",
+      "unexpected": "Failed to send reset email. Please try again."
+    }
+  },
+  "signup": {
+    "logo_alt": "Roomify logo",
+    "hero": {
+      "title": "Why join Roomify?",
+      "benefits": [
+        "Exchange rooms with verified travelers",
+        "Save money on accommodation",
+        "Experience authentic local living",
+        "Build a global community of friends",
+        "Secure messaging and booking"
+      ],
+      "testimonial": {
+        "text": "Roomify changed the way I travel. I've stayed in amazing places and made friends all over the world!",
+        "author": "Sarah M.",
+        "date": "Member since 2024"
+      }
+    },
+    "form": {
+      "title": "Create your account",
+      "subtitle": "Start your journey with Roomify today",
+      "name_label": "Full name",
+      "name_placeholder": "John Doe",
+      "email_label": "Email address",
+      "email_placeholder": "name@example.com",
+      "password_label": "Password",
+      "password_placeholder": "Create a strong password",
+      "confirm_password_label": "Confirm password",
+      "confirm_password_placeholder": "Confirm your password",
+      "show_password": "Show password",
+      "hide_password": "Hide password",
+      "show_confirm_password": "Show password confirmation",
+      "hide_confirm_password": "Hide password confirmation",
+      "password_requirements_title": "Password requirements",
+      "button_submit": "Create account",
+      "button_loading": "Creating account...",
+      "already_have_account": "Already have an account?",
+      "login_link": "Sign in",
+      "password_requirements": {
+        "length": "At least 8 characters",
+        "number": "Contains a number",
+        "uppercase": "Contains uppercase letter",
+        "match": "Passwords match"
+      },
+      "errors": {
+        "unexpected":"An error occurred during registration. Please try again.",
+        "already_exists": "This email is already registered. Try signing in instead, or use a different email address.",
+        "not_match": "Complete all password requirements."
+      }
+    }
+  },
+  "resetPassword": {
+    "title": "Set new password",
+    "subtitle": "Your identity has been verified. Choose a strong new password for your account.",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmNewPasswordPlaceholder": "Confirm new password",
+    "updating": "Updating...",
+    "submit": "Reset password",
+    "heroTitle": "Secure your account",
+    "heroDescription": "Once updated, you will be logged out of all other sessions to ensure your account remains safe.",
+    "errors": {
+      "missingEmail": "Missing account email for password reset login.",
+      "sessionExpired": "Session expired or invalid. Please request a new code."
+    }
+  },
+  "token": {
+    "token_invalid": "The provided token is invalid or has already been used.",
+    "verification_failed": "Email verification failed. Please try again.",
+    "verification_success": "Email verified successfully! You can now access your account.",
+    "password_reset_failed": "Password reset could not be completed. The link might have expired.",
+    "password_reset_success": "Your password has been updated successfully. You can now log in.",
+    "enter_6_digits": "Please enter all 6 digits"
+  },
+  "verify": {
+    "title": "Enter verification code",
+    "subtitle": "We sent a 6-digit code to your email. Enter it below to verify your identity.",
+    "button_submit": "Verify code",
+    "button_loading": "Verifying...",
+    "hero_title": "Almost there!",
+    "hero_description": "Enter the 6-digit...",
+    "validity": "Code validity",
+    "one_time_use": "One-time use",
+    "digit_label": "Digit {{number}}",
+    "secure": "Secure"
+  },
+  "popUps": {
+    "rooms": {
+      "title": "Unlock Room Management",
+      "description": "Verify your email to manage your listings, approve swap requests, and view host earnings."
+    },
+    "swaps": {
+      "title": "Unlock Your Swaps",
+      "description": "Verify your email to send, receive, and manage swap requests."
+    },
+    "trips": {
+      "title": "Unlock Trip Planning",
+      "description": "Verify your email to plan trips and organize your upcoming stays."
+    },
+    "verification": {
+      "enter_code": "Enter verification code",
+      "go_to_profile": "Go to Profile"
+    }
+  },
+  "swapActions": {
+    "accept": "Accept",
+    "reject": "Reject",
+    "accepting": "Accepting...",
+    "rejecting": "Rejecting...",
+    "cancel": "Cancel",
+    "cancelSwap": "Cancel swap",
+    "canceling": "Canceling...",
+    "resetDates": "Reset",
+    "selectDates": "Select dates",
+    "acceptTitle": "Accept request",
+    "rejectTitle": "Reject request",
+    "cancelTitle": "Cancel swap",
+    "acceptDescription": "Review the request before confirming.",
+    "rejectDescription": "This will reject the pending request.",
+    "cancelDescription": "Confirm that you want to cancel this request or active swap.",
+    "acceptSwapSuccess": "Swap request accepted.",
+    "acceptMoneySuccess": "Money offer accepted.",
+    "rejectSuccess": "Swap request rejected.",
+    "cancelSuccess": "Swap canceled successfully.",
+    "cancelInvalid": "We could not process that cancellation request. Please try again.",
+    "cancelForbidden": "Only swap participants can cancel this request.",
+    "cancelWindow": "Cancellations are only available more than 7 days before the stay.",
+    "cancelGeneralError": "This request could not be canceled.",
+    "errors": {
+      "invalidRequest": "We could not process that request. Review the selection and try again.",
+      "sessionExpired": "Your session expired. Please log in again.",
+      "ownerOnly": "Only the requested room owner can manage this request.",
+      "notFound": "This request no longer exists.",
+      "alreadyHandled": "This request was already handled.",
+      "datesUnavailable": "Those dates are no longer available. Choose a different range.",
+      "invalidSwapDates": "The selected dates are not valid for this swap.",
+      "invalidAction": "This request cannot be updated with the selected action.",
+      "cancelNow": "We couldn't cancel this request right now.",
+      "updateNow": "We couldn't update this request right now."
+    },
+    "offeredRoomDates": "Dates for their offered room",
+    "nightMaximum_one": "{{count}} night maximum",
+    "nightMaximum_other": "{{count}} nights maximum",
+    "validation": {
+      "selectOfferedRoomDates": "Select check-in and check-out dates for the offered room.",
+      "invalidDateRange": "Check-out must be after check-in.",
+      "loadOfferedRoomAvailability": "We couldn't load the offered room availability.",
+      "noSelectableDates": "The offered room has no selectable dates.",
+      "unavailableDates": "Choose dates inside availability and outside booked ranges.",
+      "nightLimit_one": "Choose {{count}} night or fewer for the offered room.",
+      "nightLimit_other": "Choose {{count}} nights or fewer for the offered room."
+    },
+    "stayTooLong_one": "The selected stay is {{selected}} nights, but this request allows only 1 night. Choose a shorter range to enable Accept.",
+    "stayTooLong_other": "The selected stay is {{selected}} nights, but this request allows up to {{count}} nights. Choose a shorter range to enable Accept."
+  },
+  "reviewActions": {
+    "leaveReview": "Leave review",
+    "title": "Leave a review",
+    "description": "Share how the completed stay went.",
+    "room": "Room",
+    "reviewing": "Reviewing",
+    "rating": "Rating",
+    "ratingAria": "Review rating",
+    "starLabel_one": "{{count}} star",
+    "starLabel_other": "{{count}} stars",
+    "comment": "Comment",
+    "commentPlaceholder": "Tell the host or guest what stood out.",
+    "characters": "{{count}}/500 characters",
+    "submit": "Submit review",
+    "submitting": "Submitting...",
+    "success": "Review submitted successfully.",
+    "error": "We couldn't submit your review. Please try again.",
+    "validation": {
+      "rating": "Select a rating from 1 to 5.",
+      "comment": "Write a comment before submitting.",
+      "commentLength": "Comment must be at most 500 characters.",
+      "commentPattern": "Comment may only contain letters, numbers, spaces, and punctuation."
+    }
+  },
+  "countries": {
+    "errors": {
+      "load": "We could not load the country list."
+    }
+  },
+  "postRoom": {
+    "title": "List Your Room",
+    "subtitle": "Share your space with travelers from around the world",
+    "progress": "{{completed}}/{{total}} complete",
+    "loadingCountries": "Loading countries...",
+    "characterCount": "{{count}}/{{max}} characters",
+    "photoAlt": "Room photo {{number}}",
+    "photoMain": "Main",
+    "fields": {
+      "title": "Title",
+      "country": "Country",
+      "city": "City",
+      "description": "Description",
+      "pricePerDayUsd": "Price per day (USD)"
+    },
+    "placeholders": {
+      "title": "e.g., Cozy Studio in Downtown",
+      "country": "Select country",
+      "city": "e.g., New York",
+      "description": "Describe your space, neighborhood, and what makes it special...",
+      "dateRange": "Select date range"
+    },
+    "sections": {
+      "basic": {
+        "title": "Basic Information",
+        "description": "Tell us about your space"
+      },
+      "availability": {
+        "title": "Availability",
+        "description": "When is your room available?"
+      },
+      "roomType": {
+        "title": "Room Type",
+        "description": "What type of space are you offering?"
+      },
+      "bedType": {
+        "title": "Bed Type",
+        "description": "What size bed does your room have?"
+      },
+      "amenities": {
+        "title": "Amenities",
+        "description": "What does your space offer?",
+        "private": "Private Amenities",
+        "general": "General Amenities"
+      },
+      "photos": {
+        "title": "Room Photos",
+        "description": "Add photo (JPG, PNG, WebP, max 5MB)"
+      }
+    },
+    "actions": {
+      "addMoreDates": "Add more dates",
+      "upload": "Click to upload or drag and drop",
+      "setMain": "Set Main",
+      "publish": "Publish Room",
+      "publishing": "Publishing..."
+    },
+    "success": {
+      "created": "Room created successfully."
+    },
+    "errors": {
+      "signInRequired": "You need to be signed in to publish a room.",
+      "imageRequired": "Please upload at least one room image.",
+      "imageLimit": "Please upload only one room image.",
+      "imageTooLarge": "Each room image must be 5MB or smaller.",
+      "imageInvalidType": "Room images must be JPG, PNG, or WebP.",
+      "titleRequired": "Please enter a room title.",
+      "titleTooLong": "Title cannot exceed 50 characters.",
+      "titlePattern": "Title may only contain letters, numbers, spaces, and punctuation.",
+      "cityRequired": "Please enter a city.",
+      "cityTooLong": "City cannot exceed 50 characters.",
+      "cityPattern": "City name contains invalid characters.",
+      "descriptionTooLong": "Description cannot exceed 500 characters.",
+      "descriptionPattern": "Description may only contain letters, numbers, spaces, and punctuation.",
+      "bedTypeRequired": "Please select a bed type.",
+      "validCountry": "Please select a valid country.",
+      "validPrice": "Please enter a valid price per day.",
+      "availabilityRequired": "Please select at least one valid availability range.",
+      "overlappingDates": "Availability ranges cannot overlap.",
+      "imageConfirm": "We couldn't confirm the uploaded image. Please try again.",
+      "publish": "We couldn't publish your room. Please try again."
+    }
+  },
+  "myRooms": {
+    "title": "Your Rooms",
+    "subtitle": "Manage your available rooms and edit their details",
+    "empty": "You don't have any rooms yet.",
+    "errors": {
+      "load": "We couldn't load your rooms right now."
+    },
+    "delete": {
+      "title": "Delete Room Listing",
+      "description": "Are you sure you want to remove this room? This will permanently delete the listing from the platform.",
+      "actionLabel": "Delete {{room}}",
+      "errors": {
+        "failed": "You can't delete this room because it has an active swap."
+      }
+    }
+  },
+  "editRoom": {
+    "loading": "Loading room...",
+    "success": {
+      "updated": "Room updated successfully."
+    },
+    "errors": {
+      "load": "We couldn't load this room.",
+      "update": "We couldn't update this room. Please try again."
+    },
+    "notFound": {
+      "title": "Room not found",
+      "description": "We couldn't find the room you want to edit."
+    },
+    "form": {
+      "title": "Edit room",
+      "pricePerDay": "Price per day",
+      "amenitiesDescription": "Choose the services guests can expect."
+    },
+    "actions": {
+      "backToRooms": "Back to Rooms",
+      "saveChanges": "Save changes"
+    }
+  },
+  "trips": {
+    "title": "Your Trips",
+    "loading": "Loading trips...",
+    "summary": {
+      "planning_one": "Managing {{count}} planning trip",
+      "planning_other": "Managing {{count}} planning trips",
+      "upcoming_one": "Managing {{count}} upcoming trip",
+      "upcoming_other": "Managing {{count}} upcoming trips",
+      "completed_one": "Managing {{count}} completed trip",
+      "completed_other": "Managing {{count}} completed trips"
+    },
+    "tabs": {
+      "ariaLabel": "Trip views",
+      "planning": {
+        "label": "Planning",
+        "emptyMessage": "You don't have any trips in planning yet.",
+        "emptyAction": "Plan a Trip"
+      },
+      "upcoming": {
+        "label": "Upcoming",
+        "emptyMessage": "You don't have any upcoming trips yet.",
+        "emptyAction": "Plan a Trip"
+      },
+      "completed": {
+        "label": "Completed",
+        "emptyMessage": "You don't have any completed trips yet.",
+        "emptyAction": "Plan a Trip"
+      }
+    },
+    "status": {
+      "planning": "PLANNING",
+      "confirmed": "CONFIRMED",
+      "pending": "PENDING APPROVAL",
+      "completed": "COMPLETED",
+      "upcoming": "UPCOMING",
+      "done": "DONE",
+      "cancelled": "CANCELLED"
+    },
+    "groupStatus": {
+      "PLANNING": "PLANNING",
+      "UPCOMING": "UPCOMING",
+      "DONE": "DONE",
+      "CANCELLED": "CANCELLED"
+    },
+    "actions": {
+      "planTrip": "Plan a Trip",
+      "backToTrips": "Back to Trips",
+      "viewItinerary": "View Itinerary"
+    },
+    "card": {
+      "noDestinations": "No destinations yet",
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days",
+      "daysUntil_one": "In {{count}} day",
+      "daysUntil_other": "In {{count}} days"
+    },
+    "upcomingSchedule": {
+      "title": "Upcoming Schedule",
+      "empty": "No upcoming trips yet."
+    },
+    "errors": {
+      "load": "We could not load your trips right now.",
+      "signInView": "You need to be signed in to view your trips.",
+      "signInCreate": "You need to be signed in to create a trip."
+    }
+  },
+  "planTripForm": {
+    "title": "Plan a New Trip",
+    "fields": {
+      "name": "Trip Name"
+    },
+    "placeholders": {
+      "name": "e.g., Summer in Europe"
+    },
+    "actions": {
+      "create": "Create Trip",
+      "creating": "Creating..."
+    },
+    "errors": {
+      "nameRequired": "Trip name is required."
+    }
+  },
+  "planTripPage": {
+    "description": "Trip planning is available from the trips dashboard."
+  },
+  "tripDetails": {
+    "loading": "Loading trip...",
+    "destinationDuration_one": "{{count}} day",
+    "destinationDuration_other": "{{count}} days",
+    "destinationCount_one": "{{count}} destination",
+    "destinationCount_other": "{{count}} destinations",
+    "pastPlanningWarning": "This trip date range is already in the past, so it can no longer be planned.",
+    "notFound": {
+      "title": "Trip not found"
+    },
+    "stats": {
+      "totalDays": "Total Days",
+      "destinations": "Destinations",
+      "status": "Status"
+    },
+    "dialog": {
+      "addDestinationTitle": "Add Destination",
+      "dates": "Dates"
+    },
+    "destinations": {
+      "title": "Destinations",
+      "findRoomsAround": "Find rooms around {{country}}",
+      "emptyHelper": "Add destinations to start planning stays",
+      "empty": "No destinations yet."
+    },
+    "actions": {
+      "viewRooms": "View rooms in {{country}}",
+      "viewDestinationContacts": "View destination contacts",
+      "completePlanning": "Complete Planning",
+      "completingPlanning": "Completing...",
+      "addDestination": "Add Destination",
+      "addingDestination": "Adding..."
+    },
+    "errors": {
+      "load": "We could not load this trip right now.",
+      "validCountry": "Please select a valid country.",
+      "dateRangeRequired": "Please select a start and end date.",
+      "startDateToday": "Start date must be today or later.",
+      "endDateAfterStart": "End date must be after start date.",
+      "dateOverlap": "Choose dates that do not overlap another destination in this trip."
+    }
+  },
+  "tripDestinationContacts": {
+    "loading": "Loading contacts...",
+    "title": "Contacts in {{country}}",
+    "backToTrip": "Back to {{title}}",
+    "notFound": "Destination not found",
+    "empty": "No contacts linked to this destination yet.",
+    "owner": "Owner: {{name}}",
+    "ownerUnavailable": "Owner unavailable",
+    "offerUserUnavailable": "Offer user unavailable",
+    "errors": {
+      "load": "We could not load this destination right now."
+    }
+  },
+  "swaps": {
+    "hero": {
+      "title": "Swaps",
+      "description": "Manage all your sent and received swap requests, and review your transaction history."
+    },
+    "panel": {
+      "eyebrow": "Swap requests",
+      "requestCount_one": "{{count}} request",
+      "requestCount_other": "{{count}} requests"
+    },
+    "tabs": {
+      "ariaLabel": "Swap request sections",
+      "sent": {
+        "label": "Sent",
+        "title": "Requested Swaps",
+        "emptyMessage": "No swaps requested yet."
+      },
+      "received": {
+        "label": "Received",
+        "title": "Received Swaps",
+        "emptyMessage": "No received swap requests yet."
+      },
+      "active": {
+        "label": "Active",
+        "title": "Active Swaps",
+        "emptyMessage": "No active swaps yet."
+      },
+      "canceled": {
+        "label": "Canceled",
+        "title": "Canceled Swaps",
+        "emptyMessage": "No canceled swaps yet."
+      },
+      "past": {
+        "label": "Past",
+        "title": "Past Swaps",
+        "emptyMessage": "No past swaps yet."
+      },
+      "expired": {
+        "label": "Expired",
+        "title": "Expired Swaps",
+        "emptyMessage": "No expired swaps yet."
+      }
+    },
+    "empty": {
+      "helper": "New matching requests will appear here as soon as they exist."
+    },
+    "error": {
+      "load": "We couldn't load your swaps right now."
+    },
+    "status": {
+      "ACCEPTED": "Accepted",
+      "PENDING": "Pending",
+      "REJECTED": "Rejected",
+      "CANCELED": "Canceled",
+      "EXPIRED": "Expired"
+    },
+    "dates": {
+      "pending": "Dates pending",
+      "createdUnavailable": "Created date unavailable"
+    },
+    "contactType": {
+      "swap": "Room swap",
+      "money": "Money offer"
+    },
+    "cards": {
+      "yourRoom": "Your room",
+      "roomYouRequested": "Room you requested",
+      "theirOfferedRoom": "Their offered room",
+      "yourOfferedRoom": "Your offered room",
+      "theirMoneyOffer": "Their money offer",
+      "yourMoneyOffer": "Your money offer",
+      "withUser": "With {{name}}",
+      "participantUnavailable": "Participant unavailable",
+      "roomFallback": "Room #{{id}}",
+      "noRoomSelected": "No room selected",
+      "madeBy": "Made by {{name}}"
+    },
+    "dialog": {
+      "requestedRoom": "Requested room",
+      "offeredRoom": "Offered room",
+      "moneyOffer": "Money offer",
+      "roomUnavailable": "Room unavailable",
+      "offeredBy": "Offered by {{name}}"
+    }
+  },
+  "button": {
+    "back": "Back",
+    "submit": "Submit",
+    "retry": "Retry",
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleting": "Deleting..."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{currentPage}} of {{totalPages}}"
+  },
+  "pageTitles": {
+    "home": "Explore Rooms",
+    "login": "Log in",
+    "signup": "Sign up",
+    "forgotPassword": "Forgot Password",
+    "verifyAccount": "Verify Account",
+    "resetPassword": "Reset Password",
+    "profile": "Profile",
+    "profileReviews": "Profile Reviews",
+    "publicProfile": "Public Profile",
+    "roomDetails": "Room Details",
+    "postRoom": "Post Your Room",
+    "editRoom": "Edit Room",
+    "myRooms": "My Rooms",
+    "swaps": "Swaps",
+    "trips": "Trips",
+    "tripDetails": "Trip Details",
+    "planTrip": "Plan a Trip",
+    "forbidden": "403 Forbidden",
+    "serverError": "500 Server Error",
+    "notFound": "404 Not Found"
+  },
+  "pageDescriptions": {
+    "home": "Find and exchange rooms with travelers around the world",
+    "login": "Log in to your Roomify account",
+    "forgotPassword": "Reset your Roomify account password",
+    "verifyAccount": "Verify your Roomify account code",
+    "resetPassword": "Choose a new Roomify account password",
+    "profile": "Manage your Roomify profile",
+    "profileReviews": "View and manage your Roomify reviews",
+    "signup": "Create your Roomify account",
+    "roomDetails": "View room details, availability, and reviews",
+    "postRoom": "List your room for exchange on Roomify",
+    "editRoom": "Edit your Roomify room listing",
+    "myRooms": "Manage your Roomify room listings",
+    "swaps": "Track your Roomify swap requests",
+    "trips": "Plan and manage your Roomify trips",
+    "tripDetails": "View your Roomify trip details",
+    "tripDestinationContacts": "View contacts for a Roomify trip destination",
+    "planTrip": "Plan a new Roomify trip",
+    "publicProfile": "View a Roomify user's public profile"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  }
+}

@@ -1,0 +1,19 @@
+<p th:text="#{email.swapCancelled.greeting(${userToNotifyName})}"></p>
+
+<!-- Body depende del estado -->
+<p th:if="${swapStatus == T(ar.edu.itba.paw.model.swaps.SwapStatus).ACCEPTED}"
+   th:text="#{email.swapCancelled.body(${userToNotifyName}, ${userCancellingName}, ${roomName}, ${country})}">
+</p>
+
+<p th:if="${swapStatus == T(ar.edu.itba.paw.model.swaps.SwapStatus).PENDING}"
+   th:text="#{email.swapCancelled.body.pending(${userToNotifyName}, ${userCancellingName}, ${roomName}, ${country})}">
+</p>
+
+<p th:text="#{email.swapCancelled.contact(${userCancellingName}, ${userCancellingEmail})}"></p>
+
+<p th:text="#{email.swapCancelled.emailRegistered(${emailToNotify})}"></p>
+
+<p>
+    <span th:text="#{email.swapCancelled.thanks}"></span><br/>
+    <b th:text="#{email.swapCancelled.keepLooking}"></b>
+</p>

@@ -1,0 +1,18 @@
+<p th:text="#{email.reset.greeting(${userName})}"></p>
+
+<p th:text="#{email.reset.intro}"></p>
+
+<p style="font-size:18px;">
+    <b th:text="${token}"></b>
+</p>
+
+<p>
+    <a th:href="${resetLink}" target="_blank"
+       style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none; border-radius:5px;"
+       th:text="#{email.reset.button}"></a>
+</p>
+
+<p th:text="#{email.reset.expiry(${expiryHours})}"></p>
+<p th:text="#{email.reset.ignore}"></p>
+<p th:text="#{email.reset.thanks}"></p>
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background:#f9f9f9; color:#333;">
+<table align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); overflow:hidden;">
+
+    <!-- HEADER -->
+    <tr>
+        <td style="background:#1d4ed8; color:#fff; padding:20px; text-align:center; font-size:20px; font-weight:bold;">
+            Roomify
+        </td>
+    </tr>
+
+    <!-- BODY (contenido dinámico) -->
+    <tr>
+        <td style="padding:20px;" th:utext="${body}"></td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+        <td style="background:#f1f1f1; text-align:center; padding:15px; font-size:12px; color:#777;" th:text="#{email.base.footer}">
+        </td>
+    </tr>
+</table>
+</body>
+</html>

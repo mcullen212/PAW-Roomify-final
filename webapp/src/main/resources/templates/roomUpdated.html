@@ -1,0 +1,21 @@
+<p th:text="#{email.swapRejected.greeting(${recipientName})}"></p>
+
+<p th:text="#{email.room.updated.body(${newTitle})}"></p>
+
+<p th:text="#{email.room.updated.changes}"></p>
+<ul>
+    <li th:if="${oldTitle != null and !#strings.isEmpty(oldTitle) and newTitle != null and !#strings.isEmpty(newTitle) and !#strings.equals(oldTitle, newTitle)}">
+        <strong th:text="#{email.room.updated.title}"></strong>
+        <span th:text="#{email.room.updated.fromTo(${oldTitle}, ${newTitle})}"></span>
+    </li>
+    <li th:if="${oldDescription != null and !#strings.isEmpty(oldDescription) and newDescription != null and !#strings.isEmpty(newDescription) and !#strings.equals(oldDescription, newDescription)}">
+        <strong th:text="#{email.room.updated.description}"></strong>
+        <span th:text="#{email.room.updated.fromTo(${oldDescription}, ${newDescription})}"></span>
+    </li>
+    <li th:if="${oldAmenities != null and !#strings.isEmpty(oldAmenities) and newAmenities != null and !#strings.isEmpty(newAmenities) and !#strings.equals(oldAmenities, newAmenities)}">
+        <strong th:text="#{email.room.updated.amenities}"></strong>
+        <span th:text="#{email.room.updated.fromTo(${oldAmenities}, ${newAmenities})}"></span>
+    </li>
+</ul>
+
+<p th:text="#{email.room.updated.thanks}"></p>

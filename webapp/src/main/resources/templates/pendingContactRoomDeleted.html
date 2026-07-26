@@ -1,0 +1,12 @@
+<p th:text="#{email.pendingContactRoomDeleted.greeting(${userToNotifyName})}"></p>
+
+<p th:text="#{email.pendingContactRoomDeleted.body(${deletingUserName}, ${roomName}, ${country})}"></p>
+
+<p th:text="#{email.pendingContactRoomDeleted.contact(${deletingUserName}, ${deletingUserEmail})}"></p>
+
+<p th:text="#{email.pendingContactRoomDeleted.emailRegistered(${emailToNotify})}"></p>
+
+<p>
+    <span th:text="#{email.pendingContactRoomDeleted.thanks}"></span><br/>
+    <b th:text="#{email.pendingContactRoomDeleted.keepLooking}"></b>
+</p>
