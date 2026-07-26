@@ -110,7 +110,7 @@ cp webapp/src/main/resources/application.properties.example webapp/src/main/reso
 cp frontend/.env.example frontend/.env
 ```
 
-In `webapp/src/main/resources/application.properties`, configure:
+In `webapp/src/main/resources/application.properties.example`, configure:
 
 - `datasource.url`, `datasource.username`, `datasource.password`
 - `spring.mail.*`
@@ -118,7 +118,7 @@ In `webapp/src/main/resources/application.properties`, configure:
 - `app.name`
 - `cors.url`
 
-In `frontend/.env`, configure:
+In `frontend/.env.example`, configure:
 
 - `VITE_PUBLIC_URL`
 - `VITE_API_URL`
