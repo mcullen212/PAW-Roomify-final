@@ -740,6 +740,7 @@ components:
         bio: { type: string }
         travelPreferences: { type: string }
         locale: { type: string }
+        self: { type: string, format: uri }
         totalReviewsReceived: { type: integer }
         averageRating: { type: number, format: double }
         totalRooms: { type: integer }

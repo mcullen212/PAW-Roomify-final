@@ -3,6 +3,7 @@ package ar.edu.itba.paw.webapp.DTO.Output;
 import ar.edu.itba.paw.model.DTO.UserProfileStats;
 import ar.edu.itba.paw.model.User;
 
+import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -33,6 +34,18 @@ public class ProfileStatsDTO extends UserDTO {
         this.totalSwaps = totalSwaps;
     }
 
+    public ProfileStatsDTO(final User user, long totalReviews, long totalWrittenReviews, double reviewAvg,
+                           BigDecimal totalEarned, BigDecimal totalSpent, long totalSwaps, final UriInfo uriInfo) {
+        super(user, uriInfo);
+
+        this.totalReviews = totalReviews;
+        this.totalWrittenReviews = totalWrittenReviews;
+        this.reviewAvg = reviewAvg;
+        this.totalEarned = totalEarned;
+        this.totalSpent = totalSpent;
+        this.totalSwaps = totalSwaps;
+    }
+
     public ProfileStatsDTO(final UserProfileStats profileStats) {
         this(
             profileStats.getUser(),
@@ -42,6 +55,19 @@ public class ProfileStatsDTO extends UserDTO {
             profileStats.getTotalEarned(),
             profileStats.getTotalSpent(),
             profileStats.getTotalSwaps()
+        );
+    }
+
+    public ProfileStatsDTO(final UserProfileStats profileStats, final UriInfo uriInfo) {
+        this(
+            profileStats.getUser(),
+            profileStats.getTotalReviews(),
+            profileStats.getTotalWrittenReviews(),
+            profileStats.getReviewAvg(),
+            profileStats.getTotalEarned(),
+            profileStats.getTotalSpent(),
+            profileStats.getTotalSwaps(),
+            uriInfo
         );
     }
 

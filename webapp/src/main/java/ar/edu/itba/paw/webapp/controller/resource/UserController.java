@@ -47,7 +47,7 @@ public class UserController {
     @Produces(VndType.APPLICATION_USER_PROFILE)
     @PreAuthorize("@webAuthHelper.isAuthorized(#id, authentication)")
     public Response getProfile(@PathParam("id") long id, @Context Request request) {
-        ProfileStatsDTO profileStatsDTO = new ProfileStatsDTO(profileService.getPrivateProfile(id));
+        ProfileStatsDTO profileStatsDTO = new ProfileStatsDTO(profileService.getPrivateProfile(id), uriInfo);
 
         return ConditionalCacheUtils.buildPrivateResponseUsingEtag(
             request,
@@ -60,7 +60,7 @@ public class UserController {
     @Path("/{id}")
     @Produces(VndType.APPLICATION_USER)
     public Response getUserById(@PathParam("id") long id, @Context Request request) {
-        PublicUserDTO publicUserDTO = new PublicUserDTO(profileService.getPublicProfile(id));
+        PublicUserDTO publicUserDTO = new PublicUserDTO(profileService.getPublicProfile(id), uriInfo);
 
         return ConditionalCacheUtils.buildResponseUsingEtag(
             request,
@@ -86,7 +86,7 @@ public class UserController {
                 updateDto.getOldPassword(),
                 updateDto.getNewPassword()
         );
-        return Response.ok(new UserDTO(updatedUser)).build();
+        return Response.ok(new UserDTO(updatedUser, uriInfo)).build();
     }
 
     @POST

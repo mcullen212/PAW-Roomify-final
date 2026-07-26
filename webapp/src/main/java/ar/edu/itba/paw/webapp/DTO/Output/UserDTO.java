@@ -1,7 +1,9 @@
 package ar.edu.itba.paw.webapp.DTO.Output;
 
 import ar.edu.itba.paw.model.User;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.URI;
 import java.util.Objects;
 
 @XmlRootElement
@@ -13,6 +15,7 @@ public class UserDTO {
     private String bio;
     private String travelPreferences;
     private String locale;
+    private URI self;
 
     public UserDTO() {
         // JAX-RS
@@ -25,6 +28,18 @@ public class UserDTO {
         this.bio = user.getBio();
         this.travelPreferences = user.getTravelPreferences();
         this.locale = user.getLocale().toLanguageTag();
+    }
+
+    public UserDTO(final User user, final UriInfo uriInfo) {
+        this(user);
+        this.self = buildUserUri(user, uriInfo);
+    }
+
+    private URI buildUserUri(final User user, final UriInfo uriInfo) {
+        return uriInfo.getBaseUriBuilder()
+                .path("users")
+                .path(String.valueOf(user.getId()))
+                .build();
     }
 
     public long getId() {
@@ -75,8 +90,16 @@ public class UserDTO {
         this.locale = locale;
     }
 
+    public URI getSelf() {
+        return self;
+    }
+
+    public void setSelf(URI self) {
+        this.self = self;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, bio, travelPreferences, locale);
+        return Objects.hash(id, name, email, bio, travelPreferences, locale, self);
     }
 }
