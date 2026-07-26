@@ -98,6 +98,9 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
         if (exception instanceof AccessDeniedException) {
             return buildResponse(Response.Status.FORBIDDEN, resolve("error.accessDenied", "Access denied."));
         }
+        if (exception instanceof TripContactsNotOwnerException) {
+            return buildResponse(Response.Status.FORBIDDEN, resolve(exception.getLocalizedMessage(), exception));
+        }
         if (exception instanceof ForbiddenUserOperationException) {
             return buildResponse(Response.Status.FORBIDDEN, resolve(exception.getLocalizedMessage(), exception));
         }

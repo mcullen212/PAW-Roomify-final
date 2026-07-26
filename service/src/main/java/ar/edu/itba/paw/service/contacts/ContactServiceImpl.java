@@ -2,6 +2,7 @@ package ar.edu.itba.paw.service.contacts;
 
 import ar.edu.itba.paw.interfaces.exceptions.*;
 import ar.edu.itba.paw.interfaces.persistence.ContactDao;
+import ar.edu.itba.paw.interfaces.persistence.TripContactDao;
 import ar.edu.itba.paw.interfaces.service.*;
 import ar.edu.itba.paw.model.*;
 import ar.edu.itba.paw.model.DTO.ContactPage;
@@ -11,6 +12,7 @@ import ar.edu.itba.paw.model.swaps.Contact;
 import ar.edu.itba.paw.model.swaps.ContactView;
 import ar.edu.itba.paw.model.swaps.SwapStatus;
 import ar.edu.itba.paw.model.trip.Trip;
+import ar.edu.itba.paw.model.trip.TripContact;
 import ar.edu.itba.paw.service.reviews.ReviewEligibilityService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 @Service
 public class ContactServiceImpl implements ContactService {
     private final ContactDao contactDao;
+    private final TripContactDao tripContactDao;
     private final UserService userService;
     private final RoomService roomService;
     private final EmailService emailService;
@@ -35,10 +38,11 @@ public class ContactServiceImpl implements ContactService {
     private final ReviewEligibilityService reviewEligibilityService;
 
 
-    public ContactServiceImpl(final ContactDao contactDao, final UserService userService, final RoomService roomService, EmailService emailService,
+    public ContactServiceImpl(final ContactDao contactDao, final TripContactDao tripContactDao, final UserService userService, final RoomService roomService, EmailService emailService,
                               RoomAvailabilityService availabilityService, TripService tripService,
                               ReviewEligibilityService reviewEligibilityService) {
         this.contactDao = contactDao;
+        this.tripContactDao = tripContactDao;
         this.userService = userService;
         this.roomService = roomService;
         this.emailService = emailService;
@@ -664,6 +668,31 @@ public class ContactServiceImpl implements ContactService {
                 : Collections.emptyMap();
 
         return new ContactPage(contacts, totalItems, safePage, safePageSize, pendingReviews);
+    }
+
+    @Transactional
+    @Override
+    public ContactPage findContactsPage(String email, ContactView view, Long tripId, int page, int pageSize) {
+        if (tripId == null) {
+            return findContactsPage(email, view, page, pageSize);
+        }
+
+        final int safePage = Math.max(page, 1);
+        final int safePageSize = Math.max(pageSize, 1);
+        final Trip trip = tripService.findTripById(tripId)
+                .orElseThrow(() -> new TripNotFoundException(tripId));
+
+        if (!email.equals(trip.getGroupTrip().getOwner().getEmail())) {
+            throw new TripContactsNotOwnerException(tripId);
+        }
+
+        final List<Contact> contacts = tripContactDao.tripContactList(tripId, safePage, safePageSize)
+                .stream()
+                .map(TripContact::getContact)
+                .collect(Collectors.toList());
+        final long totalItems = tripContactDao.countByTripId(tripId);
+
+        return new ContactPage(contacts, totalItems, safePage, safePageSize);
     }
 
     private Map<Long, Boolean> buildPendingReviewMap(String email, List<Contact> contacts, LocalDate today) {

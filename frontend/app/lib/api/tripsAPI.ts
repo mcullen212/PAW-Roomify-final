@@ -108,16 +108,27 @@ export const createTripsAPI = (client: AxiosInstance) => {
         });
     };
 
-    const getDestinationContacts = (
+    const getDestinationContacts = async (
         groupTripId: number,
         tripId: number,
         page: number,
         pageSize: number
     ) => {
-        return client.get<Contact[]>(`/group-trips/${groupTripId}/trips/${tripId}`, {
+        const destinationResponse = await client.get<TripDTO>(`/group-trips/${groupTripId}/trips/${tripId}`, {
             params: { page, pageSize },
             headers: {
                 Accept: VndType.APPLICATION_GROUP_TRIP_DESTINATION_DETAIL,
+            },
+        });
+
+        const contactsLink = destinationResponse.data._links?.contacts;
+        if (!contactsLink) {
+            throw new Error("Destination contacts link is missing.");
+        }
+
+        return client.get<Contact[]>(contactsLink, {
+            headers: {
+                Accept: VndType.APPLICATION_CONTACT,
             },
         });
     };

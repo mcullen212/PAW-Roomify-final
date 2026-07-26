@@ -3,10 +3,8 @@ package ar.edu.itba.paw.webapp.controller.resource;
 import ar.edu.itba.paw.interfaces.exceptions.DateRangeException;
 import ar.edu.itba.paw.interfaces.exceptions.GroupTripNotFoundException;
 import ar.edu.itba.paw.interfaces.service.GroupTripService;
-import ar.edu.itba.paw.interfaces.service.TripContactService;
 import ar.edu.itba.paw.interfaces.service.TripService;
 import ar.edu.itba.paw.model.DTO.GroupTripPage;
-import ar.edu.itba.paw.model.swaps.Contact;
 import ar.edu.itba.paw.model.trip.GroupTrip;
 import ar.edu.itba.paw.model.trip.Trip;
 import ar.edu.itba.paw.model.trip.TripStatus;
@@ -14,7 +12,6 @@ import ar.edu.itba.paw.webapp.DTO.Input.CreateGroupTripDTO;
 import ar.edu.itba.paw.webapp.DTO.Input.CreateTripDTO;
 import ar.edu.itba.paw.webapp.DTO.Input.UpdateGroupTripDTO;
 import ar.edu.itba.paw.webapp.DTO.Input.UpdateTripDTO;
-import ar.edu.itba.paw.webapp.DTO.Output.ContactOutputDTO;
 import ar.edu.itba.paw.webapp.DTO.Output.GroupTripDTO;
 import ar.edu.itba.paw.webapp.DTO.Output.TripDTO;
 import ar.edu.itba.paw.webapp.mediaType.VndType;
@@ -49,18 +46,15 @@ public class GroupTripsController {
 
     private final GroupTripService groupTripService;
     private final TripService tripService;
-    private final TripContactService tripContactService;
 
     @Context
     private UriInfo uriInfo;
 
     @Autowired
     public GroupTripsController(final GroupTripService groupTripService,
-                                final TripService tripService,
-                                final TripContactService tripContactService) {
+                                final TripService tripService) {
         this.groupTripService = groupTripService;
         this.tripService = tripService;
-        this.tripContactService = tripContactService;
     }
 
     @POST
@@ -218,45 +212,26 @@ public class GroupTripsController {
     @Path("/{groupTripId}/trips/{tripId}")
     @Produces(VndType.APPLICATION_GROUP_TRIP_DESTINATION_DETAIL)
     @PreAuthorize("@webAuthHelper.isOwnerTrip(#groupTripId, authentication)")
-    public Response getTripContacts(
+    public Response getTrip(
             @PathParam("groupTripId") long groupTripId,
             @PathParam("tripId") long tripId,
             @QueryParam("page") @DefaultValue("1") int page,
             @QueryParam("pageSize") @DefaultValue("12") int pageSize,
             @Context Request request)
     {
-        tripService.findTripByGroupTripId(groupTripId, tripId);
-
         final int safePage = Math.max(page, 1);
         final int safePageSize = Math.max(pageSize, 1);
-
-        final List<ContactOutputDTO> dtos = tripContactService
-                .getContactsForTrip(tripId, safePage, safePageSize)
-                .stream()
-                .map((Contact contact) -> new ContactOutputDTO(contact, uriInfo))
-                .collect(Collectors.toList());
-
-        final int totalItems = tripContactService.countContactsForTrip(tripId);
-        final int totalPages = (int) Math.ceil((double) totalItems / safePageSize);
-
-        final int hashCode = ConditionalCacheUtils.buildCollectionEtagHash(
-                dtos,
-                groupTripId,
-                tripId,
+        final TripDTO tripDTO = new TripDTO(
+                tripService.findTripByGroupTripId(groupTripId, tripId),
+                uriInfo,
                 safePage,
-                safePageSize,
-                totalItems,
-                totalPages
+                safePageSize
         );
 
         return ConditionalCacheUtils.buildPrivateResponseUsingEtag(
                 request,
-                hashCode,
-                () -> {
-                    Response.ResponseBuilder responseBuilder = Response.ok(new GenericEntity<>(dtos) {});
-                    PaginationUtils.addLinks(responseBuilder, uriInfo, safePage, totalPages);
-                    return responseBuilder;
-                }
+                tripDTO.hashCode(),
+                () -> Response.ok(tripDTO)
         );
     }
 

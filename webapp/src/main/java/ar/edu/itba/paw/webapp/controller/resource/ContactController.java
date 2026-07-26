@@ -49,10 +49,11 @@ public class ContactController {
     public Response getContacts(@QueryParam("view") @DefaultValue("sent") String view,
                                 @QueryParam("page") @DefaultValue("1") int page,
                                 @QueryParam("pageSize") @DefaultValue("10") int pageSize,
+                                @QueryParam("tripId") Long tripId,
                                 @Context Request request) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        ContactPage contactPage = contactService.findContactsPage(email, ContactView.fromQueryParam(view), page, pageSize);
+        ContactPage contactPage = contactService.findContactsPage(email, ContactView.fromQueryParam(view), tripId, page, pageSize);
         List<ContactOutputDTO> contactDtos = contactPage.getContacts().stream()
                 .map(contact -> new ContactOutputDTO(contact, uriInfo, contactPage.isReviewPending(contact.getId())))
                 .collect(Collectors.toList());

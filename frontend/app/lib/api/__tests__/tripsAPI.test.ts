@@ -87,13 +87,30 @@ describe("tripsAPI", () => {
         })
     })
 
-    it("gets destination contacts with the destination detail media type", async () => {
+    it("gets destination contacts through the destination contacts link", async () => {
+        apiMock.get
+            .mockResolvedValueOnce({
+                data: {
+                    id: 9,
+                    _links: {
+                        contacts: "/contacts?tripId=9&page=1&pageSize=6",
+                    },
+                },
+                headers: {},
+            })
+            .mockResolvedValueOnce({ data: [{ id: 12 }], headers: {} })
+
         await tripsAPI.getDestinationContacts(4, 9, 1, 6)
 
-        expect(apiMock.get).toHaveBeenCalledWith("/group-trips/4/trips/9", {
+        expect(apiMock.get).toHaveBeenNthCalledWith(1, "/group-trips/4/trips/9", {
             params: { page: 1, pageSize: 6 },
             headers: {
                 Accept: VndType.APPLICATION_GROUP_TRIP_DESTINATION_DETAIL,
+            },
+        })
+        expect(apiMock.get).toHaveBeenNthCalledWith(2, "/contacts?tripId=9&page=1&pageSize=6", {
+            headers: {
+                Accept: VndType.APPLICATION_CONTACT,
             },
         })
     })

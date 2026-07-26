@@ -64,4 +64,5 @@ public interface ContactService {
     List<Contact> expiredSwapsPage(String email, int page, int pageSize);
     long countExpiredSwaps(String email);
     ContactPage findContactsPage(String email, ContactView view, int page, int pageSize);
+    ContactPage findContactsPage(String email, ContactView view, Long tripId, int page, int pageSize);
 }

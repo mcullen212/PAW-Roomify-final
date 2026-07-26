@@ -4,6 +4,7 @@ import ar.edu.itba.paw.model.trip.Trip;
 import ar.edu.itba.paw.webapp.utils.CountryUtils;
 
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.UriBuilder;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
@@ -27,6 +28,10 @@ public class TripDTO {
     }
 
     public TripDTO(final Trip trip, final UriInfo uriInfo) {
+        this(trip, uriInfo, null, null);
+    }
+
+    public TripDTO(final Trip trip, final UriInfo uriInfo, final Integer contactsPage, final Integer contactsPageSize) {
         this.id = trip.getId();
         this.country = trip.getCountry();
         this.countryCode = CountryUtils.getCountryCode(trip.getCountry()).orElse(null);
@@ -44,6 +49,15 @@ public class TripDTO {
                 .path("group-trips")
                 .path(String.valueOf(trip.getGroupTrip().getId()))
                 .build());
+        final UriBuilder contactsUriBuilder = uriInfo.getBaseUriBuilder()
+                .path("contacts")
+                .queryParam("tripId", trip.getId());
+        if (contactsPage != null && contactsPageSize != null) {
+            contactsUriBuilder
+                    .queryParam("page", contactsPage)
+                    .queryParam("pageSize", contactsPageSize);
+        }
+        this.links.put("contacts", contactsUriBuilder.build());
     }
 
     public long getId() {

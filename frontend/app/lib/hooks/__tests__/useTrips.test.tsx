@@ -101,6 +101,15 @@ describe("useTrips", () => {
         const get = vi
             .fn()
             .mockResolvedValueOnce({ data: [{ id: 9, country: "Germany" }], headers: {} })
+            .mockResolvedValueOnce({
+                data: {
+                    id: 9,
+                    _links: {
+                        contacts: "/contacts?tripId=9&page=1&pageSize=6",
+                    },
+                },
+                headers: {},
+            })
             .mockResolvedValueOnce({ data: [{ id: 12, status: "ACCEPTED" }], headers: {} });
         const api = { get } as unknown as AxiosInstance;
         const { wrapper } = setup();
@@ -118,6 +127,9 @@ describe("useTrips", () => {
         expect(get).toHaveBeenNthCalledWith(2, "/group-trips/4/trips/9", {
             params: { page: 1, pageSize: 6 },
             headers: { Accept: VndType.APPLICATION_GROUP_TRIP_DESTINATION_DETAIL },
+        });
+        expect(get).toHaveBeenNthCalledWith(3, "/contacts?tripId=9&page=1&pageSize=6", {
+            headers: { Accept: VndType.APPLICATION_CONTACT },
         });
         expect(tripKeys.destinations(4, 1, 6)).not.toEqual(tripKeys.destinationContacts(4, 9, 1, 6));
     });

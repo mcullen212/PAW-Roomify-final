@@ -6,6 +6,7 @@ export interface ResourceLinks {
     owner?: string;
     destinations?: string;
     groupTrip?: string;
+    contacts?: string;
     [key: string]: string | undefined;
 }
 

@@ -367,9 +367,30 @@ paths:
     get:
       tags: [Contacts]
       summary: List my contacts
-      description: Lists contacts or swaps where the authenticated user is involved.
+      description: Lists contacts or swaps where the authenticated user is involved. When tripId is supplied, lists contacts associated with that trip.
       security:
         - bearerAuth: []
+      parameters:
+        - name: view
+          in: query
+          required: false
+          description: Contact view used when tripId is omitted.
+          schema:
+            type: string
+            enum: [sent, received]
+            default: sent
+        - name: tripId
+          in: query
+          required: false
+          description: Trip whose associated contacts should be listed.
+          schema:
+            type: integer
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, minimum: 1 }
       responses:
         '200':
           description: List of contacts.
@@ -613,6 +634,29 @@ paths:
                 $ref: '#/components/schemas/GroupTrip'
 
   /group-trips/{id}/trips:
+    get:
+      tags: [Group Trips]
+      summary: List group trip destinations
+      description: Lists destinations for a group trip. Each destination includes a contacts link pointing to /contacts?tripId={id}.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/GroupTripId'
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: List of destinations.
+          content:
+            application/vnd.roomify.group-trip.trip.v1.list+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
     post:
       tags: [Group Trips]
       summary: Add destination to trip
@@ -636,6 +680,52 @@ paths:
               schema:
                 type: string
                 format: uri
+
+  /group-trips/{groupTripId}/trips/{tripId}:
+    get:
+      tags: [Group Trips]
+      summary: Get group trip destination
+      description: Returns a destination resource with a contacts link pointing to /contacts?tripId={tripId}&page={page}&pageSize={pageSize}.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: groupTripId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: tripId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          required: false
+          description: Page to include in the destination contacts link.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          description: Page size to include in the destination contacts link.
+          schema:
+            type: integer
+            minimum: 1
+            default: 12
+      responses:
+        '200':
+          description: Destination details.
+          content:
+            application/vnd.roomify.group-trip.trip.v1+json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        '403':
+          description: Not authorized to access this group trip.
+        '404':
+          description: Destination not found.
 
   /images:
     post:
@@ -999,14 +1089,24 @@ components:
       type: object
       properties:
         id: { type: integer }
-        destination: { type: string }
-        checkIn: { type: string, format: date }
-        checkOut: { type: string, format: date }
+        country: { type: string }
+        countryCode: { type: string, nullable: true }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        _links:
+          type: object
+          additionalProperties:
+            type: string
+            format: uri
+          example:
+            self: /group-trips/4/trips/9
+            groupTrip: /group-trips/4
+            contacts: /contacts?tripId=9&page=1&pageSize=12
 
     TripCreate:
       type: object
-      required: [destination, checkIn, checkOut]
+      required: [country, startDate, endDate]
       properties:
-        destination: { type: string }
-        checkIn: { type: string, format: date }
-        checkOut: { type: string, format: date }
+        country: { type: string }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
