@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,10 @@ export default function NotFound({
     descriptionKey = "error404.description",
 }: NotFoundProps) {
     const { t } = useTranslation();
+    const location = useLocation();
+    const state = location.state as NotFoundProps | null;
+    const resolvedTitleKey = state?.titleKey ?? titleKey;
+    const resolvedDescriptionKey = state?.descriptionKey ?? descriptionKey;
 
     return (
         <div className="min-h-screen flex flex-col bg-white">
@@ -33,12 +37,12 @@ export default function NotFound({
 
                     {/* Title */}
                     <h1 className="mb-3 text-4xl font-bold text-red-500">
-                        {t(titleKey)}
+                        {t(resolvedTitleKey)}
                     </h1>
 
                     {/* Description */}
                     <p className="mb-8 text-gray-600">
-                        {t(descriptionKey)}
+                        {t(resolvedDescriptionKey)}
                     </p>
 
                     {/* Button */}

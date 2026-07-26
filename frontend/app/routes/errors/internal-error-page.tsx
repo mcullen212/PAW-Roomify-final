@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Home, RefreshCw, ServerCrash } from "lucide-react"
+import { Home, ServerCrash } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next";
 import { Navbar } from "@/components/Navbar.tsx";
@@ -11,10 +11,6 @@ export function meta() {
 
 export default function InternalServerError() {
     const { t } = useTranslation();
-
-    const handleRefresh = () => {
-        window.location.reload();
-    };
 
     return (
         <div className="min-h-screen flex flex-col bg-white">
@@ -37,27 +33,16 @@ export default function InternalServerError() {
                         {t("error500.desc")}
                     </p>
 
-                    {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button
-                            onClick={handleRefresh}
-                            className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 h-auto"
-                        >
-                            <RefreshCw className="mr-2 h-4 w-4" />
-                            {t("error500.buttonRetry")}
-                        </Button>
-
-                        <Button
-                            variant="outline"
-                            asChild
-                            className="px-6 py-2 h-auto"
-                        >
-                            <Link to="/">
-                                <Home className="mr-2 h-4 w-4" />
-                                {t("error500.buttonHome")}
-                            </Link>
-                        </Button>
-                    </div>
+                    {/* Button */}
+                    <Button
+                        asChild
+                        className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 h-auto"
+                    >
+                        <Link to="/">
+                            <Home className="mr-2 h-4 w-4" />
+                            {t("error500.buttonHome")}
+                        </Link>
+                    </Button>
                 </div>
             </main>
         </div>

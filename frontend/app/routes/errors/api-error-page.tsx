@@ -1,9 +1,6 @@
 import { HttpStatus } from "@/lib/api/httpStatus"
 import { hasApiErrorStatus } from "@/lib/api/api-error-status"
-import BadRequest from "~/routes/errors/bad-request"
-import NotFound from "~/routes/errors/not-found-page"
-import Forbidden from "~/routes/errors/forbidden-page"
-import InternalServerError from "~/routes/errors/internal-error-page"
+import { Navigate } from "react-router-dom"
 
 type ApiErrorPageOptions = {
     badRequest?: boolean
@@ -19,12 +16,18 @@ export function getApiErrorPage(
         notFoundDescriptionKey,
     }: ApiErrorPageOptions,
 ) {
-    if (badRequest || hasApiErrorStatus(HttpStatus.BAD_REQUEST, error)) return <BadRequest />
+    if (badRequest || hasApiErrorStatus(HttpStatus.BAD_REQUEST, error)) return <Navigate to="/400" replace />
     if (hasApiErrorStatus(HttpStatus.NOT_FOUND, error)) {
-        return <NotFound titleKey={notFoundTitleKey} descriptionKey={notFoundDescriptionKey} />
+        return (
+            <Navigate
+                to="/404"
+                replace
+                state={{ titleKey: notFoundTitleKey, descriptionKey: notFoundDescriptionKey }}
+            />
+        )
     }
-    if (hasApiErrorStatus(HttpStatus.FORBIDDEN, error)) return <Forbidden />
-    if (hasApiErrorStatus(HttpStatus.INTERNAL_SERVER_ERROR, error)) return <InternalServerError />
+    if (hasApiErrorStatus(HttpStatus.FORBIDDEN, error)) return <Navigate to="/403" replace />
+    if (hasApiErrorStatus(HttpStatus.INTERNAL_SERVER_ERROR, error)) return <Navigate to="/500" replace />
 
     return null
 }
